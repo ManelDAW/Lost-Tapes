@@ -1,11 +1,13 @@
 <template>
   <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button v-for="(slide, i) in slides" :key="i" type="button" 
+      <button v-for="(slide, i) in movieStore.peliculas" 
+              :key="'ind-'+i" type="button" 
+              data-bs-target="#mainCarousel"
               :class="{active: i === 0}" :data-bs-slide-to="i"></button>
     </div>
     <div class="carousel-inner">
-      <div v-for="(slide, i) in slides" :key="i" 
+      <div v-for="(slide, i) in movieStore.peliculas" :key="slide.id" 
            :class="['carousel-item', {active: i === 0}]">
         <img :src="slide.img" class="d-block w-100" :alt="slide.title" loading="lazy">
         <div class="carousel-caption d-none d-md-block text-start">
@@ -26,9 +28,6 @@
 </template>
 
 <script setup>
-const slides = [
-  { img: '/src/assets/peliculas/harakiri/1.jpg', title: 'Harakiri', desc: 'Drama samurái que desmonta el código del honor.' },
-  { img: '/src/assets/peliculas/brandedToKill/1.jpg', title: 'Branded To Kill', desc: 'Thriller experimental japonés.' },
-  { img: '/src/assets/peliculas/andreiRublev/1.jpg', title: 'Andrei Rublev', desc: 'Retrato de Tarkovski sobre arte y fe.' }
-]
+import { useMovieStore } from '@/stores/movieStore';
+const movieStore = useMovieStore();
 </script>

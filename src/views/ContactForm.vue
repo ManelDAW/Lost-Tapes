@@ -43,5 +43,45 @@
 </script>
 
 <style scoped>
+.contacto {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #222;
+  border-radius: 8px;
+}
 
+.contacto h1 {
+  text-align: center;
+  color: #fff;
+}
+
+.form-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-contacto label {
+  font-weight: bold;
+  color: #eee;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+  padding: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.form-contacto button {
+  padding: 12px;
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 </style>

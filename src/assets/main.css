@@ -1,0 +1,98 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #fff;
+  color: #111;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.accesibilidad {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+#accesibilidad button,
+#menuAccesibilidad button {
+  display: block;
+  margin-top: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1em;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#accesibilidad button:hover,
+#menuAccesibilidad button:hover {
+  background: #333;
+}
+
+button:focus {
+  outline: 3px solid rgb(0, 0, 0);
+}
+
+/* ============================= */
+/* DE: estilos_accesibilidad.css - MODO OSCURO */
+/* ============================= */
+body.tema-oscuro {
+  --site-bg: #111;
+  --text-color: #e8e8e8;
+  --muted-color: #999;
+  --header-bg: #111;
+  --header-text: #fff;
+  --footer-bg: #222;
+  background-color: var(--site-bg);
+  color: var(--text-color);
+}
+
+body.tema-oscuro .section-title {
+  color: var(--text-color);
+}
+
+/* Header en tema oscuro */
+body.tema-oscuro .header {
+  background: var(--header-bg);
+  color: var(--header-text);
+}
+
+body.tema-oscuro .header a,
+body.tema-oscuro .header a.nav-link {
+  color: var(--header-text);
+}
+
+/* Películas en tema oscuro */
+body.tema-oscuro .pelicula-card {
+  background-color: #222;
+  border-color: #444;
+  color: #eee;
+}
+
+body.tema-oscuro .pelicula-card .card-title {
+  color: #fff;
+}
+
+body.tema-oscuro .pelicula-card .duracion,
+body.tema-oscuro .pelicula-card .card-text {
+  color: #ccc;
+}
