@@ -1,60 +1,85 @@
-<template>
-  <article class="card pelicula-card h-100" role="article">
-    <img :src="pelicula.img" class="card-img-top" :alt="pelicula.title" loading="lazy">
-    <div class="card-body">
-      <div class="d-flex justify-content-between mb-2">
-        <h5 class="card-title">{{ pelicula.title }}</h5>
-        <span class="duracion">{{ pelicula.duracion }}</span>
-      </div>
-      <p class="card-text">{{ pelicula.desc }}</p>
-    </div>
-  </article>
-</template>
-
 <script setup>
 defineProps({
-  pelicula: {
-    type: Object,
-    required: true
-  }
-})
+  movie: Object
+});
+
+const getImageUrl = (folder) => {
+  if (!folder) return '';
+  // Mantenemos la lógica para buscar la imagen en assets
+  return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
+};
 </script>
 
+<template>
+  <!-- El v-if evita que el componente intente leer datos inexistentes -->
+  <div v-if="movie" class="card-movie">
+    <div class="card-img-container">
+      <img :src="getImageUrl(movie.folder)" :alt="movie.title" class="card-img">
+    </div>
+    <div class="card-body">
+      <div class="card-header-info">
+        <h3 class="card-title">{{ movie.title }}</h3>
+        <span class="card-duration">{{ movie.duracion }}</span>
+      </div>
+      <p class="card-desc">{{ movie.desc }}</p>
+    </div>
+  </div>
+</template>
+
 <style scoped>
-.pelicula-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "portada portada"
-    "info info"
-    "descripcion descripcion";
-  gap: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
+.card-movie {
+  background: white;
   border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
 }
 
-.pelicula-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.card-movie:hover {
+  transform: translateY(-5px);
 }
 
-.pelicula-card .card-img-top {
-  grid-area: portada;
+.card-img-container {
   width: 100%;
-  border-radius: 6px;
+  height: 200px;
 }
 
-.pelicula-card .card-title {
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  text-align: left;
+}
+
+.card-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.2em;
+  margin: 0;
   color: #333;
 }
 
-.pelicula-card .duracion {
-  font-size: 0.9em;
-  color: #555;
+.card-duration {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  margin: 0;
 }
 </style>

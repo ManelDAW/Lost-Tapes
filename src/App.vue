@@ -1,31 +1,33 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import FooterApp from './components/FooterApp.vue'
+import { RouterView } from "vue-router";
+import NavBar from './components/NavBar.vue';
+import FooterApp from './components/FooterApp.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/contacto">Contacto</RouterLink>
-        <RouterLink to="/productos">Productos</RouterLink>
-        <RouterLink to="/vender">Vender</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <NavBar />
 
-  <main>
+  <main class="main-content">
     <RouterView />
   </main>
 
-  <footer>
-    <div class="wrapper">
-      <FooterApp />
-    </div>
-  </footer>
+  <FooterApp />
 </template>
 
-<style scoped>
-/* Estilo intacto como pediste */
+<style>
+.main-content {
+  padding-top: 80px; /* Ajusta según la altura de tu NavBar */
+  min-height: calc(100vh - 160px); /* Asegura que el footer no flote en páginas cortas */
+}
+
+/* Transiciones básicas para el cambio de páginas */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
