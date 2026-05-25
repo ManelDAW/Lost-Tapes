@@ -1,69 +1,41 @@
 import axios from 'axios'
 
-const SERVER = 'http://localhost:3000'
+const SERVER = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
-async function getDBBooks() {
-    return axios.get(`${SERVER}/books`)
+const api = axios.create({
+  baseURL: SERVER,
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+})
+
+export async function getMovies() {
+  return api.get('/peliculas')
 }
 
-async function getDBEmployees() {
-    return axios.get(`${SERVER}/empleados`)
+export async function getMovie(id) {
+  return api.get(`/peliculas/${id}`)
 }
 
-async function getDBClients(id) {
-    return axios.get(`${SERVER}/clientes?gestor=`+id)
+export async function createMovie(data) {
+  return api.post('/peliculas', data)
 }
 
-async function getDBClient(id) {
-    return axios.get(`${SERVER}/clientes/`+id)
+export async function updateMovie(id, data) {
+  return api.put(`/peliculas/${id}`, data)
 }
 
-async function deleteDBClients(itemId) {
-    return axios.delete(`${SERVER}/clients/${itemId}`)
+export async function deleteMovie(id) {
+  return api.delete(`/peliculas/${id}`)
 }
 
-async function changeDBClient(id,client) {
-    return axios.put(`${SERVER}/clientes/${id}`, client)
+export async function login(email, password) {
+  return api.post('/login', { email, password })
 }
 
-async function createDBClient(id,client) {
-    return axios.post(`${SERVER}/clientes/`, client)
+export async function logout() {
+  return api.post('/logout')
 }
 
-async function getDBModules() {
-    return axios.get(`${SERVER}/modules`)
-}
-
-async function getDBItem(bookId) {
-    return axios.get(SERVER + '/books/' + bookId);
-}
-
-async function getDBItemById(itemId) {
-    return axios.get(`${SERVER}/todos/${itemId}`)
-}
-
-async function addDBItem(newItem) {
-    return axios.post(`${SERVER}/books`, newItem)
-}
-
-async function removeDBItem(itemId) {
-    return axios.delete(`${SERVER}/books/${itemId}`)
-}
-
-async function changeDBItem(item) {
-    return axios.put(`${SERVER}/books/${item.id}`, item)
-}
-
-async function changeDBItemDone(item) {
-    return item.done = !item.done
-}
-
-
-export {
-    getDBEmployees,
-    getDBClients,
-    deleteDBClients,
-    changeDBClient,
-    createDBClient,
-    getDBClient,
+export async function getProfile() {
+  return api.get('/user')
 }

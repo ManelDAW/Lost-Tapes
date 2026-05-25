@@ -11,6 +11,14 @@ const showDropdown = ref(false);
 const user = computed(() => movieStore.user);
 const isAdminOrVendedor = computed(() => user.value?.role === 'admin' || user.value?.role === 'vendedor');
 
+const searchQuery = ref('');
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    router.push({ path: '/productos', query: { q: searchQuery.value.trim() } });
+    searchQuery.value = '';
+  }
+};
+
 const logout = () => {
   movieStore.logout();
   showDropdown.value = false;
@@ -32,14 +40,19 @@ const logout = () => {
       <nav class="nav-center">
         <ul class="nav-list">
           <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/nosotros">Nosotros</router-link></li>
           <li><router-link to="/contacto">Contacto</router-link></li>
           <li><router-link to="/productos">Productos</router-link></li>
-          <li><router-link to="/vender">Sell</router-link></li>
+          <li v-if="isAdminOrVendedor"><router-link to="/vender">Vender</router-link></li>
         </ul>
       </nav>
 
       <!-- 3. Sesión / Botón (Derecha) -->
       <div class="nav-right">
+        <form class="search-form" @submit.prevent="handleSearch">
+          <input v-model="searchQuery" type="text" placeholder="Buscar..." class="search-input" />
+          <button type="submit" class="search-btn">🔍</button>
+        </form>
         <div class="session">
           <router-link v-if="!user" to="/login" class="session-btn">Iniciar sesión</router-link>
           <div v-else class="dropdown">
@@ -101,6 +114,35 @@ const logout = () => {
   flex: 2;
 }
 
+.search-form {
+  display: flex;
+  gap: 4px;
+  margin-right: 16px;
+}
+
+.search-input {
+  padding: 5px 10px;
+  background: #222;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 4px;
+  font-size: 13px;
+  width: 150px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ff6600;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+}
+
 .nav-list {
   list-style: none;
   display: flex;
@@ -126,7 +168,9 @@ const logout = () => {
 .nav-right {
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
 }
 
 .session-btn {
@@ -139,6 +183,7 @@ const logout = () => {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s;
+  white-space: nowrap;
 }
 
 .session-btn:hover {

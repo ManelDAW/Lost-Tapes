@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted } from 'vue';
 import CarruselApp from '../components/CarruselApp.vue';
 import CardProducte from '../components/CardProducte.vue';
+import VideoPromo from '../components/VideoPromo.vue';
 import { useMovieStore } from '@/stores/movieStore';
 
 const movieStore = useMovieStore();
@@ -16,6 +16,8 @@ const movieStore = useMovieStore();
     <CarruselApp />
 
     <!-- Forzamos el renderizado solo cuando hay películas -->
+    <VideoPromo video="/src/assets/videos/whiteMare.mp4" />
+
     <div v-if="movieStore.peliculas.length > 0" class="movies-grid">
       <CardProducte 
         v-for="movie in movieStore.peliculas.slice(0, 3)" 

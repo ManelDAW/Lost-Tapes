@@ -2,7 +2,6 @@
 import { RouterView } from "vue-router";
 import NavBar from './components/NavBar.vue';
 import FooterApp from './components/FooterApp.vue';
-import VideoPromo from "./components/VideoPromo.vue";
 </script>
 
 <template>
@@ -10,9 +9,6 @@ import VideoPromo from "./components/VideoPromo.vue";
 
   <main class="main-content">
     <RouterView />
-    <VideoPromo
-    video="/src/assets/videos/whiteMare.mp4" 
-    />
   </main>
 
   <FooterApp />

@@ -1,18 +1,18 @@
 <script setup>
-defineProps({
-  movie: Object
-});
+import { useRouter } from 'vue-router';
+
+defineProps({ movie: Object });
+
+const router = useRouter();
 
 const getImageUrl = (folder) => {
   if (!folder) return '';
-  // Mantenemos la lógica para buscar la imagen en assets
   return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
 };
 </script>
 
 <template>
-  <!-- El v-if evita que el componente intente leer datos inexistentes -->
-  <div v-if="movie" class="card-movie">
+  <div v-if="movie" class="card-movie" @click="router.push(`/productos/${movie.id}`)" style="cursor:pointer">
     <div class="card-img-container">
       <img :src="getImageUrl(movie.folder)" :alt="movie.title" class="card-img">
     </div>
@@ -28,7 +28,7 @@ const getImageUrl = (folder) => {
 
 <style scoped>
 .card-movie {
-  background: white;
+  background: var(--page-card-bg);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -68,17 +68,17 @@ const getImageUrl = (folder) => {
   font-size: 1.1rem;
   font-weight: bold;
   margin: 0;
-  color: #333;
+  color: var(--page-text);
 }
 
 .card-duration {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--page-muted);
 }
 
 .card-desc {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--page-muted);
   line-height: 1.4;
   margin: 0;
 }
