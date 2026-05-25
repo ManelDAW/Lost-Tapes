@@ -1,20 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useMovieStore } from '@/stores/movieStore';
+import { computed } from 'vue';
 
 const router = useRouter();
-const searchQuery = ref('');
+const movieStore = useMovieStore();
 const showDropdown = ref(false);
-const user = ref(null);
 
-const handleSearch = () => {
-  if (searchQuery.value.trim()) {
-    router.push({ name: 'ProductsView', query: { q: searchQuery.value.trim() } });
-  }
-};
+const user = computed(() => movieStore.user);
+const isAdminOrVendedor = computed(() => user.value?.role === 'admin' || user.value?.role === 'vendedor');
 
 const logout = () => {
-  user.value = null;
+  movieStore.logout();
+  showDropdown.value = false;
   router.push('/');
 };
 </script>
@@ -49,6 +48,7 @@ const logout = () => {
             </button>
             <div v-if="showDropdown" class="session-dropdown">
               <router-link to="/perfil">Mi perfil</router-link>
+              <router-link v-if="isAdminOrVendedor" to="/admin/productos">Gestionar productos</router-link>
               <a href="#" @click.prevent="logout">Cerrar sesión</a>
             </div>
           </div>

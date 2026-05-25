@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useMovieStore = defineStore('movieStore', {
   state: () => ({
-    // Las 3 películas que se mostrarán en el carrusel
+    user: null,
     peliculas: [
       {
         id: 1,
@@ -34,6 +34,12 @@ export const useMovieStore = defineStore('movieStore', {
   }),
 
   actions: {
+    setUser(user) {
+      this.user = user;
+    },
+    logout() {
+      this.user = null;
+    },
     async fetchMovies() {
       this.loading = true
       try {

@@ -3,7 +3,7 @@
     <h2 class="section-title mb-4">Nuestro Catálogo</h2>
     <div class="row g-4">
       <div v-for="peli in movieStore.peliculas" :key="peli.id" class="col-12 col-md-6 col-lg-4">
-        <CardProducte :pelicula="peli" />
+        <CardProducte :movie="peli" />
       </div>
     </div>
   </main>

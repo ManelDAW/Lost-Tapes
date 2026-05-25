@@ -11,10 +11,10 @@ const router = createRouter({
     { path: '/contacto', name: 'contacto', component: ContactForm },
     { path: '/productos', name: 'productos', component: ProductsView },
     { path: '/vender', name: 'vender', component: () => import('../views/AboutView.vue') },
-    { 
-      path: '/login', 
-      name: 'login', 
-      component: () => import('../views/AboutView.vue') // O tu vista de Login real
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
     },
   ],
 })
