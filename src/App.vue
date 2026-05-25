@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import NavBar from './components/NavBar.vue';
 import FooterApp from './components/FooterApp.vue';
+import VideoPromo from "./components/VideoPromo.vue";
 </script>
 
 <template>
@@ -9,6 +10,9 @@ import FooterApp from './components/FooterApp.vue';
 
   <main class="main-content">
     <RouterView />
+    <VideoPromo
+    video="/src/assets/videos/whiteMare.mp4" 
+    />
   </main>
 
   <FooterApp />
@@ -16,8 +20,10 @@ import FooterApp from './components/FooterApp.vue';
 
 <style>
 .main-content {
-  padding-top: 80px; /* Ajusta según la altura de tu NavBar */
-  min-height: calc(100vh - 160px); /* Asegura que el footer no flote en páginas cortas */
+  padding-top: 80px;
+  /* Ajusta según la altura de tu NavBar */
+  min-height: calc(100vh - 160px);
+  /* Asegura que el footer no flote en páginas cortas */
 }
 
 /* Transiciones básicas para el cambio de páginas */

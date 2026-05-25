@@ -9,7 +9,6 @@
 
 <script setup>
 defineProps({
-  video: String,
-  poster: String
+  video: String
 })
 </script>
