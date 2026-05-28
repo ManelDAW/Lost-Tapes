@@ -43,7 +43,7 @@ onMounted(() => {
       <!-- Sección Soporte -->
       <div class="footer-seccion">
         <h4>Soporte</h4>
-        <a href="#">Preguntas Frecuentes</a>
+        <router-link to="/nosotros">Sobre Nosotros</router-link>
         <a href="#">Términos de Servicio</a>
         <a href="#">Privacidad</a>
       </div>
