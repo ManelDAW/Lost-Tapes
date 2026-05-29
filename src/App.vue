@@ -16,10 +16,8 @@ import FooterApp from './components/FooterApp.vue';
 
 <style>
 .main-content {
-  padding-top: 80px;
-  /* Ajusta según la altura de tu NavBar */
+  padding-top: 70px; /* Altura del navbar Bootstrap fixed-top */
   min-height: calc(100vh - 160px);
-  /* Asegura que el footer no flote en páginas cortas */
 }
 
 /* Transiciones básicas para el cambio de páginas */

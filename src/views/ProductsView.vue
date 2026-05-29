@@ -1,16 +1,3 @@
-<template>
-  <main class="catalogo-wrapper">
-    <h2 class="catalogo-title">Nuestro Catálogo</h2>
-    <p v-if="route.query.q" class="search-info">
-      Resultados para "<strong>{{ route.query.q }}</strong>": {{ filteredMovies.length }} encontradas
-    </p>
-    <p v-if="filteredMovies.length === 0" class="no-results">No se encontraron películas.</p>
-    <div class="movies-grid">
-      <CardProducte v-for="peli in filteredMovies" :key="peli.id" :movie="peli" />
-    </div>
-  </main>
-</template>
-
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
@@ -29,44 +16,22 @@ const filteredMovies = computed(() => {
 });
 </script>
 
-<style scoped>
-.catalogo-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
-}
+<template>
+  <div class="container-xl py-5">
+    <h2 class="fw-bold text-center mb-4" style="font-size:2rem;">Nuestro Catálogo</h2>
 
-.catalogo-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 40px;
-}
+    <p v-if="route.query.q" class="text-muted mb-3">
+      Resultados para "<strong>{{ route.query.q }}</strong>": {{ filteredMovies.length }} encontradas
+    </p>
 
-.search-info {
-  color: #888;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  text-align: left;
-}
+    <div v-if="filteredMovies.length === 0" class="alert alert-secondary">
+      No se encontraron películas.
+    </div>
 
-.no-results {
-  color: #888;
-  font-style: italic;
-  margin-top: 20px;
-}
-
-.movies-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 900px) {
-  .movies-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 560px) {
-  .movies-grid { grid-template-columns: 1fr; }
-}
-</style>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+      <div class="col" v-for="peli in filteredMovies" :key="peli.id">
+        <CardProducte :movie="peli" />
+      </div>
+    </div>
+  </div>
+</template>

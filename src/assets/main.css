@@ -1,4 +1,4 @@
-
+/* ── Variables de página (modo claro) ───────────────────────── */
 :root {
   --page-bg: #fff;
   --page-text: #111;
@@ -6,6 +6,7 @@
   --page-card-bg: #f5f5f5;
   --page-border: #e0e0e0;
   --page-input-bg: #f0f0f0;
+  --accent: #ff6600;
 }
 
 body {
@@ -18,20 +19,121 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* ── Modo oscuro ──────────────────────────────────────────── */
+body.tema-oscuro {
+  --page-bg: #0d0d0d;
+  --page-text: #e8e8e8;
+  --page-muted: #aaa;
+  --page-card-bg: #1a1a1a;
+  --page-border: #2a2a2a;
+  --page-input-bg: #111;
 
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  color: #111;
+  /* Bootstrap variable overrides */
+  --bs-body-bg: #0d0d0d;
+  --bs-body-color: #e8e8e8;
+  --bs-card-bg: #1a1a1a;
+  --bs-card-border-color: #2a2a2a;
+  --bs-border-color: #2a2a2a;
+  --bs-table-bg: #1a1a1a;
+  --bs-table-color: #e8e8e8;
+  --bs-table-border-color: #2a2a2a;
+
+  background-color: var(--page-bg);
+  color: var(--page-text);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+body.tema-oscuro .card {
+  background-color: var(--page-card-bg);
+  border-color: var(--page-border);
+  color: var(--page-text);
 }
 
+body.tema-oscuro .card-text,
+body.tema-oscuro .card-title {
+  color: var(--page-text);
+}
+
+body.tema-oscuro .form-control,
+body.tema-oscuro .form-select,
+body.tema-oscuro .form-control:focus,
+body.tema-oscuro .form-select:focus {
+  background-color: var(--page-input-bg);
+  border-color: var(--page-border);
+  color: var(--page-text);
+}
+
+body.tema-oscuro .form-control:focus,
+body.tema-oscuro .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 102, 0, 0.25);
+  border-color: var(--accent);
+}
+
+body.tema-oscuro .table {
+  color: var(--page-text);
+  border-color: var(--page-border);
+}
+
+body.tema-oscuro .modal-content {
+  background-color: #1a1a1a;
+  color: #e8e8e8;
+  border-color: #2a2a2a;
+}
+
+body.tema-oscuro .modal-header,
+body.tema-oscuro .modal-footer {
+  border-color: #2a2a2a;
+}
+
+body.tema-oscuro .section-title {
+  color: var(--page-text);
+}
+
+/* ── Botón naranja ─────────────────────────────────────────── */
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: #e05500;
+  color: #fff;
+}
+
+/* ── Film-strip (login, contacto, vender) ─────────────────── */
+.film-wrap {
+  display: flex;
+  background-color: #111;
+  border: 1px solid #333;
+  width: 100%;
+}
+
+.film-edge {
+  width: 36px;
+  background-color: #111;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.film-edge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #eee 18px, transparent 18px);
+  background-size: 100% 36px;
+}
+
+.film-content {
+  flex: 1;
+  padding: 40px 30px;
+  color: white;
+}
+
+/* ── Accesibilidad flotante ───────────────────────────────── */
 .accesibilidad {
   position: fixed;
   bottom: 20px;
@@ -39,75 +141,6 @@ body {
   z-index: 9999;
 }
 
-#accesibilidad button,
-#menuAccesibilidad button {
-  display: block;
-  margin-top: 0.3rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 1em;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#accesibilidad button:hover,
-#menuAccesibilidad button:hover {
-  background: #333;
-}
-
 button:focus {
-  outline: 3px solid rgb(0, 0, 0);
-}
-
-/* ============================= */
-/* DE: estilos_accesibilidad.css - MODO OSCURO */
-/* ============================= */
-body.tema-oscuro {
-  --site-bg: #111;
-  --text-color: #e8e8e8;
-  --muted-color: #999;
-  --header-bg: #111;
-  --header-text: #fff;
-  --footer-bg: #222;
-  --page-bg: #0d0d0d;
-  --page-text: #e8e8e8;
-  --page-muted: #aaa;
-  --page-card-bg: #1a1a1a;
-  --page-border: #2a2a2a;
-  --page-input-bg: #111;
-  background-color: var(--page-bg);
-  color: var(--text-color);
-}
-
-body.tema-oscuro .section-title {
-  color: var(--text-color);
-}
-
-/* Header en tema oscuro */
-body.tema-oscuro .header {
-  background: var(--header-bg);
-  color: var(--header-text);
-}
-
-body.tema-oscuro .header a,
-body.tema-oscuro .header a.nav-link {
-  color: var(--header-text);
-}
-
-/* Películas en tema oscuro */
-body.tema-oscuro .pelicula-card {
-  background-color: #222;
-  border-color: #444;
-  color: #eee;
-}
-
-body.tema-oscuro .pelicula-card .card-title {
-  color: #fff;
-}
-
-body.tema-oscuro .pelicula-card .duracion,
-body.tema-oscuro .pelicula-card .card-text {
-  color: #ccc;
+  outline: 3px solid #000;
 }
