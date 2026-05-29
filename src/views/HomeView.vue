@@ -12,6 +12,7 @@ const movieStore = useMovieStore();
 <template>
   <div class="home-container">
     <h2 class="main-title">New Cult Movies</h2>
+    <h1>Hola a todos</h1>
 
     <CarruselApp />
 
