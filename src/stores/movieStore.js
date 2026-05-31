@@ -1,13 +1,6 @@
 import { defineStore } from 'pinia'
 import { getMovies, login, logout, getProfile } from '@/services/api'
 
-// Fallback para cuando el backend no está disponible
-const FAKE_USERS = [
-  { id: 1, name: 'Admin',    email: 'admin@losttapes.com',    password: '1234', role: 'admin' },
-  { id: 2, name: 'Vendedor', email: 'vendedor@losttapes.com', password: '1234', role: 'vendedor' },
-  { id: 3, name: 'Editor',   email: 'editor@losttapes.com',   password: '1234', role: 'editor' },
-]
-
 // Mapea un producto del backend al formato que usa el frontend
 function mapProduct(p) {
   return {
@@ -61,15 +54,12 @@ export const useMovieStore = defineStore('movieStore', {
           return { ok: true }
         }
         return { ok: false, message: 'Respuesta inesperada del servidor.' }
-      } catch {
-        // Fallback: usuarios locales para desarrollo sin backend
-        const found = FAKE_USERS.find(u => u.email === email && u.password === password)
-        if (found) {
-          const { password: _, ...safe } = found
-          this.user = safe
-          return { ok: true }
+      } catch (err) {
+        const status = err.response?.status
+        if (status === 401 || status === 422) {
+          return { ok: false, message: 'Email o contraseña incorrectos.' }
         }
-        return { ok: false, message: 'Email o contraseña incorrectos.' }
+        return { ok: false, message: 'No se puede conectar con el servidor.' }
       }
     },
 

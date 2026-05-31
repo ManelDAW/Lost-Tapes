@@ -50,9 +50,6 @@ const handleLogin = async () => {
           </button>
         </form>
 
-        <p class="mt-4" style="font-size:0.8rem; color:#666;">
-          Prueba: <code style="color:#ff6600;">admin@losttapes.com</code> / <code style="color:#ff6600;">1234</code>
-        </p>
       </div>
       <div class="film-edge"></div>
     </div>
