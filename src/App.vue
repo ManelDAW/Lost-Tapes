@@ -1,7 +1,16 @@
 <script setup>
+import { onMounted } from 'vue';
 import { RouterView } from "vue-router";
 import NavBar from './components/NavBar.vue';
 import FooterApp from './components/FooterApp.vue';
+import { useMovieStore } from '@/stores/movieStore';
+
+const store = useMovieStore();
+
+onMounted(async () => {
+  await store.restoreSession();
+  await store.fetchMovies();
+});
 </script>
 
 <template>

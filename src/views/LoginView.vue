@@ -9,18 +9,14 @@ const movieStore = useMovieStore();
 const email = ref('');
 const password = ref('');
 const error = ref('');
+const loading = ref(false);
 
-const fakeUsers = [
-  { id: 1, name: 'Admin',    email: 'admin@losttapes.com',    password: '1234', role: 'admin' },
-  { id: 2, name: 'Vendedor', email: 'vendedor@losttapes.com', password: '1234', role: 'vendedor' },
-  { id: 3, name: 'Editor',   email: 'editor@losttapes.com',   password: '1234', role: 'editor' },
-];
-
-const handleLogin = () => {
+const handleLogin = async () => {
   error.value = '';
-  const user = fakeUsers.find(u => u.email === email.value && u.password === password.value);
-  if (!user) { error.value = 'Email o contraseña incorrectos.'; return; }
-  movieStore.setUser(user);
+  loading.value = true;
+  const result = await movieStore.loginUser(email.value, password.value);
+  loading.value = false;
+  if (!result.ok) { error.value = result.message; return; }
   router.push('/');
 };
 </script>
@@ -49,7 +45,9 @@ const handleLogin = () => {
 
           <div v-if="error" class="alert alert-danger py-2 small">{{ error }}</div>
 
-          <button type="submit" class="btn btn-light w-100 fw-bold text-uppercase mt-1">Entrar</button>
+          <button type="submit" class="btn btn-light w-100 fw-bold text-uppercase mt-1" :disabled="loading">
+            {{ loading ? 'Cargando...' : 'Entrar' }}
+          </button>
         </form>
 
         <p class="mt-4" style="font-size:0.8rem; color:#666;">
