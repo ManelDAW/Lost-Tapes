@@ -1,26 +1,23 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useMovieStore } from '@/stores/movieStore';
+import { useRouter } from 'vue-router';
+import { getImageUrl } from '@/utils/imageUrl';
+
+const router = useRouter();
 
 const movieStore = useMovieStore();
 const currentIndex = ref(0);
 let timerPelicula = null;
 
-// Limitamos a 3 para coincidir con tu requerimiento
-const totalSlides = 3;
+const totalSlides = computed(() => Math.min(3, movieStore.peliculas.length));
 
 const nextSlide = () => {
-  currentIndex.value = (currentIndex.value + 1) % totalSlides;
+  currentIndex.value = (currentIndex.value + 1) % totalSlides.value;
 };
 
 const prevSlide = () => {
-  currentIndex.value = (currentIndex.value - 1 + totalSlides) % totalSlides;
-};
-
-// Función para resolver rutas en src/assets/img/peliculas/
-const getImageUrl = (folder) => {
-  // Importante: la ruta relativa debe ser correcta desde la ubicación de este archivo
-  return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
+  currentIndex.value = (currentIndex.value - 1 + totalSlides.value) % totalSlides.value;
 };
 
 onMounted(() => {
@@ -39,13 +36,13 @@ onUnmounted(() => {
       <!-- Flechas de navegación -->
       <button class="nav-btn prev" @click="prevSlide" aria-label="Anterior">❮</button>
       
-      <div class="slide-content">
-        <img 
-          :src="getImageUrl(movieStore.peliculas[currentIndex].folder)" 
+      <div class="slide-content" style="cursor:pointer;"
+           @click="router.push(`/productos/${movieStore.peliculas[currentIndex].id}`)">
+        <img
+          :src="getImageUrl(movieStore.peliculas[currentIndex])"
           :alt="movieStore.peliculas[currentIndex].title"
           class="slide-img"
         >
-        
         <div class="info-panel">
           <h3 class="movie-title">{{ movieStore.peliculas[currentIndex].title }}</h3>
           <p class="movie-desc">{{ movieStore.peliculas[currentIndex].desc }}</p>
@@ -56,8 +53,8 @@ onUnmounted(() => {
 
       <!-- Puntos indicadores -->
       <div class="indicators">
-        <span 
-          v-for="i in totalSlides" 
+        <span
+          v-for="i in totalSlides"
           :key="'dot-'+i"
           :class="['dot', { active: (i - 1) === currentIndex }]"
           @click="currentIndex = (i - 1)"

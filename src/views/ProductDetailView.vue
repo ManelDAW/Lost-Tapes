@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMovieStore } from '@/stores/movieStore';
+import { getImageUrl } from '@/utils/imageUrl';
 
 const route = useRoute();
 const router = useRouter();
@@ -12,11 +13,6 @@ const user = computed(() => movieStore.user);
 
 const newComment = ref('');
 const liked = ref(false);
-
-const getImageUrl = (folder) => {
-  if (!folder) return '';
-  return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
-};
 
 const submitComment = () => {
   if (!newComment.value.trim()) return;
@@ -41,9 +37,10 @@ const handleLike = () => {
     <button class="btn btn-sm btn-outline-secondary mb-4" @click="router.back()">← Volver</button>
 
     <div class="row g-4 mb-5">
-      <div class="col-12 col-md-4 col-lg-3">
-        <img :src="getImageUrl(movie.folder)" :alt="movie.title"
-             class="img-fluid rounded shadow" style="aspect-ratio:2/3; object-fit:cover; width:100%;" />
+      <div class="col-12 col-md-4 col-lg-3 text-center text-md-start">
+        <img :src="getImageUrl(movie)" :alt="movie.title"
+             class="img-fluid rounded shadow mx-auto d-block d-md-inline"
+             style="aspect-ratio:2/3; object-fit:cover; max-width:260px; width:100%;" />
       </div>
       <div class="col-12 col-md-8 col-lg-9">
         <h1 class="fw-bold mb-1" style="font-size:2rem; color: var(--page-text);">{{ movie.title }}</h1>

@@ -1,21 +1,17 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import { getImageUrl } from '@/utils/imageUrl';
 
 defineProps({ movie: Object });
 
 const router = useRouter();
-
-const getImageUrl = (folder) => {
-  if (!folder) return '';
-  return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
-};
 </script>
 
 <template>
   <div v-if="movie" class="card h-100 shadow-sm"
        style="cursor:pointer; border-color: var(--page-border); background: var(--page-card-bg);"
        @click="router.push(`/productos/${movie.id}`)">
-    <img :src="getImageUrl(movie.folder)" :alt="movie.title"
+    <img :src="getImageUrl(movie)" :alt="movie.title"
          class="card-img-top" style="height:200px; object-fit:cover;" />
     <div class="card-body d-flex flex-column">
       <div class="d-flex justify-content-between align-items-start mb-1">
