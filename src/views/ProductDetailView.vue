@@ -11,6 +11,13 @@ const movieStore = useMovieStore();
 const movie = computed(() => movieStore.peliculas.find(p => p.id === Number(route.params.id)));
 const user = computed(() => movieStore.user);
 
+const relatedMovies = computed(() => {
+  if (!movie.value?.category) return [];
+  return movieStore.peliculas
+    .filter(p => p.id !== movie.value.id && p.category === movie.value.category)
+    .slice(0, 3);
+});
+
 const newComment = ref('');
 const liked = ref(false);
 
@@ -97,8 +104,41 @@ const handleLike = () => {
     </section>
   </div>
 
+    <!-- Películas relacionadas -->
+    <section v-if="relatedMovies.length > 0" class="mt-5 pt-4 border-top"
+             style="border-color: var(--page-border) !important;">
+      <h2 class="fw-bold mb-4" style="font-size:1.3rem; color: var(--page-text);">
+        También te puede interesar
+      </h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="col" v-for="rel in relatedMovies" :key="rel.id">
+          <div class="related-card card h-100" @click="router.push(`/productos/${rel.id}`)"
+               style="cursor:pointer; background: var(--page-card-bg); border-color: var(--page-border);">
+            <img :src="getImageUrl(rel)" :alt="rel.title"
+                 style="height:140px; object-fit:cover; width:100%;" />
+            <div class="card-body py-2 px-3">
+              <p class="mb-0 fw-bold small" style="color: var(--page-text);">{{ rel.title }}</p>
+              <p class="mb-0 small" style="color: var(--page-muted);">{{ rel.duracion }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <div v-else class="text-center py-5">
     <p style="color: var(--page-muted);">Película no encontrada.</p>
     <button class="btn btn-accent mt-3" @click="router.push('/productos')">Ver catálogo</button>
   </div>
 </template>
+
+<style scoped>
+.related-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+.related-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
+}
+</style>
