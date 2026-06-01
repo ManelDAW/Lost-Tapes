@@ -27,7 +27,7 @@ onMounted(async () => {
 
 <style>
 .main-content {
-  padding-top: 70px; /* Altura del navbar Bootstrap fixed-top */
+  padding-top: 60px;
   min-height: calc(100vh - 160px);
 }
 
