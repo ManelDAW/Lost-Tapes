@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMovieStore } from '@/stores/movieStore';
+import { useCartStore } from '@/stores/cartStore';
 import { getImageUrl } from '@/utils/imageUrl';
 
 const route = useRoute();
@@ -10,6 +11,14 @@ const movieStore = useMovieStore();
 
 const movie = computed(() => movieStore.peliculas.find(p => p.id === Number(route.params.id)));
 const user = computed(() => movieStore.user);
+const cart = useCartStore();
+const addedToCart = ref(false);
+
+const addToCart = () => {
+  cart.add(movie.value);
+  addedToCart.value = true;
+  setTimeout(() => { addedToCart.value = false; }, 2000);
+};
 
 const relatedMovies = computed(() => {
   if (!movie.value?.category) return [];
@@ -51,7 +60,10 @@ const handleLike = () => {
       </div>
       <div class="col-12 col-md-8 col-lg-9">
         <h1 class="fw-bold mb-1" style="font-size:2rem; color: var(--page-text);">{{ movie.title }}</h1>
-        <p class="mb-3" style="color: var(--page-muted);">{{ movie.duracion }}</p>
+        <p class="mb-2" style="color: var(--page-muted);">{{ movie.duracion }}</p>
+        <p class="mb-4 fw-bold" style="font-size:1.6rem; color: var(--accent);">
+          {{ Number(movie.price).toFixed(2) }} €
+        </p>
         <p class="mb-4" style="color: var(--page-muted); line-height:1.75;">{{ movie.desc }}</p>
 
         <div class="d-flex align-items-center gap-3 flex-wrap">
@@ -60,6 +72,9 @@ const handleLike = () => {
                   @click="handleLike"
                   :disabled="!user || liked">
             ❤️ {{ movie.likes }} Me gusta
+          </button>
+          <button class="btn btn-accent fw-bold rounded-pill px-4" @click="addToCart">
+            {{ addedToCart ? '✓ Añadido' : '🛒 Añadir al carrito' }}
           </button>
           <small v-if="!user" style="color: var(--page-muted);">Inicia sesión para interactuar</small>
         </div>

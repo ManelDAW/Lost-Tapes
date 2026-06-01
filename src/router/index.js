@@ -37,6 +37,11 @@ const router = createRouter({
       component: () => import('../views/AdminProductsView.vue'),
       meta: { requiresAuth: true, roles: ['admin', 'vendedor'] }
     },
+    {
+      path: '/carrito',
+      name: 'carrito',
+      component: () => import('../views/CartView.vue'),
+    },
   ],
 })
 

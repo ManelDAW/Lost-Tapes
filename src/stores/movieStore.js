@@ -7,7 +7,7 @@ function mapProduct(p) {
     id: p.id,
     title: p.name,
     desc: p.description || '',
-    duracion: p.duracion || '',
+    duracion: p.duration || '',
     folder: p.folder || null,
     image: p.image || null,
     price: p.price,

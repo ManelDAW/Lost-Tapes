@@ -19,11 +19,17 @@ const router = useRouter();
     </div>
     <div class="card-body d-flex flex-column"
          style="background: var(--page-card-bg); border-color: var(--page-border);">
-      <div class="d-flex justify-content-between align-items-start mb-1">
+      <div class="mb-1">
         <h5 class="card-title mb-0 fs-6 fw-bold" style="color: var(--page-text);">{{ movie.title }}</h5>
-        <small style="color: var(--page-muted); white-space:nowrap; margin-left:8px;">{{ movie.duracion }}</small>
       </div>
-      <p class="card-text small mt-auto" style="color: var(--page-muted); line-height:1.4;">{{ movie.desc }}</p>
+      <p class="card-text small" style="color: var(--page-muted); line-height:1.4;">{{ movie.desc }}</p>
+      <div class="mt-auto pt-2 d-flex align-items-center justify-content-between"
+           style="border-top: 1px solid var(--page-border);">
+        <span class="fw-bold" style="color: var(--accent); font-size: 1.05rem;">
+          {{ Number(movie.price).toFixed(2) }} €
+        </span>
+        <small style="color: var(--page-muted);">{{ movie.duracion }}</small>
+      </div>
     </div>
   </div>
 </template>

@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { RouterView } from "vue-router";
 import NavBar from './components/NavBar.vue';
 import FooterApp from './components/FooterApp.vue';
+import CartDrawer from './components/CartDrawer.vue';
 import { useMovieStore } from '@/stores/movieStore';
 
 const store = useMovieStore();
@@ -15,6 +16,7 @@ onMounted(async () => {
 
 <template>
   <NavBar />
+  <CartDrawer />
 
   <main class="main-content">
     <RouterView />
