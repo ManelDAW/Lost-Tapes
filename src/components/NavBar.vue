@@ -23,12 +23,17 @@ const logout = () => {
   router.push('/');
 };
 
-const closeDropdownOnOutsideClick = (e) => {
-  if (!e.target.closest('.user-menu-wrap')) showDropdown.value = false;
+const closeOnOutsideClick = (e) => {
+  if (!e.target.closest('.lt-nav')) {
+    menuOpen.value = false;
+    showDropdown.value = false;
+  } else if (!e.target.closest('.user-menu-wrap')) {
+    showDropdown.value = false;
+  }
 };
 
-onMounted(() => document.addEventListener('click', closeDropdownOnOutsideClick));
-onUnmounted(() => document.removeEventListener('click', closeDropdownOnOutsideClick));
+onMounted(() => document.addEventListener('click', closeOnOutsideClick));
+onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
 </script>
 
 <template>
@@ -123,8 +128,6 @@ onUnmounted(() => document.removeEventListener('click', closeDropdownOnOutsideCl
       </div>
     </div>
 
-    <!-- Overlay mobile -->
-    <div v-if="menuOpen" class="lt-mobile-overlay" @click="closeMenu"></div>
   </nav>
 </template>
 
@@ -376,12 +379,4 @@ onUnmounted(() => document.removeEventListener('click', closeDropdownOnOutsideCl
 }
 .lt-mobile-menu__logout:hover { border-color: #e53935; color: #e53935; }
 
-/* Overlay */
-.lt-mobile-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1020;
-  background: rgba(0,0,0,0.5);
-  top: 60px;
-}
 </style>
