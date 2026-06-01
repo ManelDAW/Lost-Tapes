@@ -102,7 +102,6 @@ const handleLike = () => {
         Todavía no hay comentarios. ¡Sé el primero!
       </p>
     </section>
-  </div>
 
     <!-- Películas relacionadas -->
     <section v-if="relatedMovies.length > 0" class="mt-5 pt-4 border-top"

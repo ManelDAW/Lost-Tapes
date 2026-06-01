@@ -66,9 +66,6 @@ const logout = () => {
             <router-link class="nav-link" to="/nosotros" @click="closeNavbar">Nosotros</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/nosotros#sostenibilidad" @click="closeNavbar">Sostenibilidad</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" to="/contacto" @click="closeNavbar">Contacto</router-link>
           </li>
           <li class="nav-item">
