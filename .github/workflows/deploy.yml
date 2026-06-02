@@ -1,10 +1,10 @@
 name: Deploy Lost Tapes Project
 
-# Se ejecuta automáticamente cada vez que haces un 'git push' a la rama main
+# Se ejecuta automáticamente cada vez que haces un 'git push' a la rama rama-sprint5
 on:
   push:
     branches:
-      - main
+      - rama-sprint5  # 👈 Configurado exactamente para tu rama del Sprint 5
 
 jobs:
   # TRABAJO 1: COMPILACIÓN (Dependencias y Build de Vue)
@@ -60,6 +60,5 @@ jobs:
           # Evitar que pregunte interactivamente si confías en el servidor externo
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           
-          # RSYNC SEGURO Y LIMPIO: Enviamos el contenido de ./dist/ a la carpeta exclusiva del frontend.
-          # Usamos --delete para limpiar versiones antiguas de Vue de forma segura sin tocar el backend.
+          # RSYNC SEGURO Y LIMPIO: Directo a la carpeta del frontend
           rsync -rav --delete --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/frontend/
