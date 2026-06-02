@@ -1,31 +1,42 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { useForm, useField } from 'vee-validate';
+import { object, string, number } from 'yup';
 import { useMovieStore } from '@/stores/movieStore';
+import { computed, ref } from 'vue';
 
 const movieStore = useMovieStore();
 const user = computed(() => movieStore.user);
-
-const title = ref('');
-const duracion = ref('');
-const desc = ref('');
-const price = ref('');
 const submitted = ref(false);
 
-const handleSubmit = () => {
+const schema = object({
+  title: string().required('El título es obligatorio'),
+  duracion: string().required('La duración es obligatoria'),
+  price: number().typeError('Introduce un número válido').required('El precio es obligatorio').min(0, 'El precio no puede ser negativo'),
+  desc: string().required('La descripción es obligatoria').min(10, 'Mínimo 10 caracteres'),
+});
+
+const { handleSubmit, resetForm } = useForm({ validationSchema: schema });
+const { value: title, errorMessage: titleError } = useField('title');
+const { value: duracion, errorMessage: duracionError } = useField('duracion');
+const { value: price, errorMessage: priceError } = useField('price');
+const { value: desc, errorMessage: descError } = useField('desc');
+
+const onSubmit = handleSubmit((values) => {
   movieStore.peliculas.push({
     id: movieStore.peliculas.length + 1,
-    title: title.value,
-    duracion: duracion.value,
-    desc: desc.value,
-    folder: '',
+    title: values.title,
+    duracion: values.duracion,
+    desc: values.desc,
+    price: values.price,
+    folder: null,
     likes: 0,
     comments: [],
   });
   submitted.value = true;
-};
+});
 
 const reset = () => {
-  title.value = ''; duracion.value = ''; desc.value = ''; price.value = '';
+  resetForm();
   submitted.value = false;
 };
 </script>
@@ -43,26 +54,34 @@ const reset = () => {
           <button class="btn btn-light fw-bold text-uppercase w-100" @click="reset">Añadir otra</button>
         </div>
 
-        <form v-else @submit.prevent="handleSubmit">
+        <form v-else @submit.prevent="onSubmit" novalidate>
           <div class="mb-3">
             <label class="form-label fw-bold text-white">Título</label>
             <input v-model="title" type="text" placeholder="Título de la película"
-                   class="form-control" style="background:#000; border-color:#444; color:white;" required />
+                   class="form-control" :class="{ 'is-invalid': titleError }"
+                   style="background:#000; border-color:#444; color:white;" />
+            <div v-if="titleError" class="invalid-feedback">{{ titleError }}</div>
           </div>
           <div class="mb-3">
             <label class="form-label fw-bold text-white">Duración</label>
             <input v-model="duracion" type="text" placeholder="ej: 127'"
-                   class="form-control" style="background:#000; border-color:#444; color:white;" required />
+                   class="form-control" :class="{ 'is-invalid': duracionError }"
+                   style="background:#000; border-color:#444; color:white;" />
+            <div v-if="duracionError" class="invalid-feedback">{{ duracionError }}</div>
           </div>
           <div class="mb-3">
             <label class="form-label fw-bold text-white">Precio (€)</label>
             <input v-model="price" type="number" placeholder="ej: 12.99" min="0" step="0.01"
-                   class="form-control" style="background:#000; border-color:#444; color:white;" required />
+                   class="form-control" :class="{ 'is-invalid': priceError }"
+                   style="background:#000; border-color:#444; color:white;" />
+            <div v-if="priceError" class="invalid-feedback">{{ priceError }}</div>
           </div>
           <div class="mb-3">
             <label class="form-label fw-bold text-white">Descripción</label>
             <textarea v-model="desc" rows="4" placeholder="Descripción breve de la película"
-                      class="form-control" style="background:#000; border-color:#444; color:white;" required></textarea>
+                      class="form-control" :class="{ 'is-invalid': descError }"
+                      style="background:#000; border-color:#444; color:white;"></textarea>
+            <div v-if="descError" class="invalid-feedback">{{ descError }}</div>
           </div>
           <div class="mb-3 p-3 text-center rounded" style="border:2px dashed #444; color:#666; font-size:0.85rem;">
             Subida de imágenes disponible al conectar con el servidor

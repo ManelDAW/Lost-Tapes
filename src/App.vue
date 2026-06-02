@@ -1,11 +1,22 @@
 <script setup>
+import { onMounted } from 'vue';
 import { RouterView } from "vue-router";
 import NavBar from './components/NavBar.vue';
 import FooterApp from './components/FooterApp.vue';
+import CartDrawer from './components/CartDrawer.vue';
+import { useMovieStore } from '@/stores/movieStore';
+
+const store = useMovieStore();
+
+onMounted(async () => {
+  await store.restoreSession();
+  await store.fetchMovies();
+});
 </script>
 
 <template>
   <NavBar />
+  <CartDrawer />
 
   <main class="main-content">
     <RouterView />
@@ -16,7 +27,7 @@ import FooterApp from './components/FooterApp.vue';
 
 <style>
 .main-content {
-  padding-top: 70px; /* Altura del navbar Bootstrap fixed-top */
+  padding-top: 60px;
   min-height: calc(100vh - 160px);
 }
 

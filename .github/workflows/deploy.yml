@@ -27,7 +27,6 @@ jobs:
         run: |
           npm install --progress=false
           npm run build
-
       # 4. Guardar todo el proyecto listo (incluyendo los archivos compilados de Vue)
       # para que el siguiente trabajo de despliegue pueda acceder a ellos
       - name: Guardar artefacto del proyecto

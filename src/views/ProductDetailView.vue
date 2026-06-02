@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMovieStore } from '@/stores/movieStore';
+import { useCartStore } from '@/stores/cartStore';
+import { getImageUrl } from '@/utils/imageUrl';
 
 const route = useRoute();
 const router = useRouter();
@@ -9,14 +11,24 @@ const movieStore = useMovieStore();
 
 const movie = computed(() => movieStore.peliculas.find(p => p.id === Number(route.params.id)));
 const user = computed(() => movieStore.user);
+const cart = useCartStore();
+const addedToCart = ref(false);
+
+const addToCart = () => {
+  cart.add(movie.value);
+  addedToCart.value = true;
+  setTimeout(() => { addedToCart.value = false; }, 2000);
+};
+
+const relatedMovies = computed(() => {
+  if (!movie.value?.category) return [];
+  return movieStore.peliculas
+    .filter(p => p.id !== movie.value.id && p.category === movie.value.category)
+    .slice(0, 3);
+});
 
 const newComment = ref('');
 const liked = ref(false);
-
-const getImageUrl = (folder) => {
-  if (!folder) return '';
-  return new URL(`../assets/img/peliculas/${folder}/1.jpg`, import.meta.url).href;
-};
 
 const submitComment = () => {
   if (!newComment.value.trim()) return;
@@ -41,13 +53,17 @@ const handleLike = () => {
     <button class="btn btn-sm btn-outline-secondary mb-4" @click="router.back()">← Volver</button>
 
     <div class="row g-4 mb-5">
-      <div class="col-12 col-md-4 col-lg-3">
-        <img :src="getImageUrl(movie.folder)" :alt="movie.title"
-             class="img-fluid rounded shadow" style="aspect-ratio:2/3; object-fit:cover; width:100%;" />
+      <div class="col-12 col-md-4 col-lg-3 text-center text-md-start">
+        <img :src="getImageUrl(movie)" :alt="movie.title"
+             class="img-fluid rounded shadow mx-auto d-block d-md-inline"
+             style="aspect-ratio:2/3; object-fit:cover; max-width:260px; width:100%;" />
       </div>
       <div class="col-12 col-md-8 col-lg-9">
         <h1 class="fw-bold mb-1" style="font-size:2rem; color: var(--page-text);">{{ movie.title }}</h1>
-        <p class="mb-3" style="color: var(--page-muted);">{{ movie.duracion }}</p>
+        <p class="mb-2" style="color: var(--page-muted);">{{ movie.duracion }}</p>
+        <p class="mb-4 fw-bold" style="font-size:1.6rem; color: var(--accent);">
+          {{ Number(movie.price).toFixed(2) }} €
+        </p>
         <p class="mb-4" style="color: var(--page-muted); line-height:1.75;">{{ movie.desc }}</p>
 
         <div class="d-flex align-items-center gap-3 flex-wrap">
@@ -56,6 +72,9 @@ const handleLike = () => {
                   @click="handleLike"
                   :disabled="!user || liked">
             ❤️ {{ movie.likes }} Me gusta
+          </button>
+          <button class="btn btn-accent fw-bold rounded-pill px-4" @click="addToCart">
+            {{ addedToCart ? '✓ Añadido' : '🛒 Añadir al carrito' }}
           </button>
           <small v-if="!user" style="color: var(--page-muted);">Inicia sesión para interactuar</small>
         </div>
@@ -98,6 +117,27 @@ const handleLike = () => {
         Todavía no hay comentarios. ¡Sé el primero!
       </p>
     </section>
+
+    <!-- Películas relacionadas -->
+    <section v-if="relatedMovies.length > 0" class="mt-5 pt-4 border-top"
+             style="border-color: var(--page-border) !important;">
+      <h2 class="fw-bold mb-4" style="font-size:1.3rem; color: var(--page-text);">
+        También te puede interesar
+      </h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="col" v-for="rel in relatedMovies" :key="rel.id">
+          <div class="related-card card h-100" @click="router.push(`/productos/${rel.id}`)"
+               style="cursor:pointer; background: var(--page-card-bg); border-color: var(--page-border);">
+            <img :src="getImageUrl(rel)" :alt="rel.title"
+                 style="height:140px; object-fit:cover; width:100%;" />
+            <div class="card-body py-2 px-3">
+              <p class="mb-0 fw-bold small" style="color: var(--page-text);">{{ rel.title }}</p>
+              <p class="mb-0 small" style="color: var(--page-muted);">{{ rel.duracion }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div v-else class="text-center py-5">
@@ -105,3 +145,14 @@ const handleLike = () => {
     <button class="btn btn-accent mt-3" @click="router.push('/productos')">Ver catálogo</button>
   </div>
 </template>
+
+<style scoped>
+.related-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+.related-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
+}
+</style>

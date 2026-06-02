@@ -13,6 +13,7 @@ const router = createRouter({
     { path: '/nosotros', name: 'nosotros', component: AboutView },
     { path: '/productos', name: 'productos', component: ProductsView },
     { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
+    { path: '/auth/callback', name: 'auth-callback', component: () => import('../views/AuthCallback.vue') },
     {
       path: '/perfil',
       name: 'perfil',
@@ -35,6 +36,11 @@ const router = createRouter({
       name: 'admin-productos',
       component: () => import('../views/AdminProductsView.vue'),
       meta: { requiresAuth: true, roles: ['admin', 'vendedor'] }
+    },
+    {
+      path: '/carrito',
+      name: 'carrito',
+      component: () => import('../views/CartView.vue'),
     },
   ],
 })
