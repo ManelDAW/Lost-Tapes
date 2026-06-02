@@ -1,16 +1,15 @@
 name: Deploy Lost Tapes Project
 
-# Se ejecuta automáticamente cada vez que haces un 'git push' a la rama main
+# Se ejecuta automáticamente cada vez que haces un 'git push' a la rama rama-sprint5
 on:
   push:
     branches:
-      - main
+      - rama-sprint5  # 👈 Configurado exactamente para tu rama del Sprint 5
 
 jobs:
   # TRABAJO 1: COMPILACIÓN (Dependencias y Build de Vue)
   build-frontend:
     runs-on: ubuntu-latest
-
     steps:
       # 1. Clonar el repositorio
       - name: Checkout del código
@@ -20,7 +19,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Versión estable recomendada para proyectos actuales
+          node-version: '20'
 
       # 3. Instalar dependencias de npm y compilar el proyecto Vue
       - name: Instalar dependencias y compilar Vue
@@ -28,27 +27,25 @@ jobs:
           npm install --progress=false
           npm run build
 
-      # 4. Guardar todo el proyecto listo (incluyendo los archivos compilados de Vue)
-      # para que el siguiente trabajo de despliegue pueda acceder a ellos
+      # 4. Guardar SOLO los archivos compilados de la carpeta /dist
       - name: Guardar artefacto del proyecto
         uses: actions/upload-artifact@v4
         with:
           name: production-ready-code
-          path: .
+          path: dist/
           retention-days: 1
 
   # TRABAJO 2: DESPLIEGUE AUTOMÁTICO (A tu servidor EC2)
   deploy-to-ec2:
     runs-on: ubuntu-latest
     needs: build-frontend 
-
     steps:
-      # 1. Descargar el código ya compilado del paso anterior
+      # 1. Descargar el código compilado (el contenido de /dist)
       - name: Descargar código compilado
         uses: actions/download-artifact@v4
         with:
           name: production-ready-code
-          path: .
+          path: ./dist
 
       # 2. Configurar la clave SSH secreta y hacer el despliegue con rsync
       - name: Configurar SSH y desplegar con Rsync
@@ -63,10 +60,5 @@ jobs:
           # Evitar que pregunte interactivamente si confías en el servidor externo
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           
-          # Hacer el rsync automático al directorio de Nginx/Apache de tu servidor AWS.
-          # NOTA: Asegúrate de excluir directorios que no quieras machacar (como .git o node_modules si no los usas en producción)
-          rsync -rav --delete \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='node_modules/' \
-            ./ ubuntu@32.193.169.162:/var/www/lost-tapes/html/
+          # RSYNC SEGURO Y LIMPIO: Directo a la carpeta del frontend
+          rsync -rav --delete --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/frontend/
