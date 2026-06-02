@@ -30,7 +30,7 @@ onMounted(async () => {
   <FooterApp />
 </template>
 
-<style>
+<style scoped>
 .main-content {
   padding-top: 60px;
   min-height: calc(100vh - 160px);
