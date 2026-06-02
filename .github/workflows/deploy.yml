@@ -3,7 +3,7 @@ name: Deploy Frontend to EC2
 on:
   push:
     branches:
-      - main  # O la rama que uses para producción (por ejemplo, master)
+      - main
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Cambia a la versión de Node que use tu proyecto (18, 20, etc.)
+          node-version: '20' # Actualizado a Node 20 para que Vite 7 no falle
 
       - name: Instalar dependencias y compilar
         run: |
@@ -28,11 +28,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          # Evita que el pipeline se congele pidiendo confirmación del host
           ssh-keyscan -H 44.193.254.173 >> ~/.ssh/known_hosts
 
       - name: Desplegar archivos con rsync
         run: |
-          # El truco está en: --no-perms --no-owner --no-group
-          # Esto sube los archivos de dist/ sin intentar cambiar los dueños de Linux
-          rsync -avz --delete --no-perms --no-owner --no-group ./ dist/ ubuntu@44.193.254.173:/var/www/frontend/
+          # Tu comando original con el truco para que no falle por los permisos de Linux
+          rsync -avz --delete --no-perms --no-owner --no-group ./ ubuntu@44.193.254.173:/var/www/frontend/
