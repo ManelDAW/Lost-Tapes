@@ -63,4 +63,4 @@ jobs:
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           
           # Hacer el rsync enviando el contenido de ./dist/ directamente a /var/www/html/
-          rsync -rav --delete ./dist/ ubuntu@44.193.254.173:/var/www/html/
+          rsync -rav --delete ./ ubuntu@44.193.254.173:/var/www/frontend/
