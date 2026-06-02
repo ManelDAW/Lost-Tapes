@@ -60,6 +60,6 @@ jobs:
           # Evitar que pregunte interactivamente si confías en el servidor externo
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           
-          # TRUCO RSYNC: Enviamos el contenido de ./dist/ directo a la carpeta public de Laravel
-          # Evitamos modificar los dueños y permisos nativos de Linux con --no-perms --no-owner --no-group
-          rsync -rav --delete --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/Lost-Tapes/current/public/
+          # RSYNC SEGURO: Quitamos '--delete' para NO borrar el backend de tu compañero.
+          # Usamos -rlptgoD en lugar de -a para evitar conflictos de tiempos y dueños.
+          rsync -rlptgoD --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/Lost-Tapes/current/public/
