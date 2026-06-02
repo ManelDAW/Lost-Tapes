@@ -69,4 +69,4 @@ jobs:
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='node_modules/' \
-            ./ ubuntu@44.193.254.173:/var/www/lost-tapes/html/
+            ./ ubuntu@44.193.254.173:/var/www/frontend/
