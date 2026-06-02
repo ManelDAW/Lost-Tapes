@@ -60,5 +60,6 @@ jobs:
           # Evitar que pregunte interactivamente si confías en el servidor externo
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           
-          # RSYNC SEGURO Y DEFINITIVO: Con -O evitamos que falle por las fechas de las carpetas de AWS
-          rsync -rlptgoD -O --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/Lost-Tapes/current/public/
+          # RSYNC SEGURO Y LIMPIO: Enviamos el contenido de ./dist/ a la carpeta exclusiva del frontend.
+          # Usamos --delete para limpiar versiones antiguas de Vue de forma segura sin tocar el backend.
+          rsync -rav --delete --no-perms --no-owner --no-group ./dist/ ubuntu@44.193.254.173:/var/www/frontend/
