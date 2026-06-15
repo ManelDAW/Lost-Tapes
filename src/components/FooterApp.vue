@@ -129,7 +129,7 @@ onMounted(() => {
 
 .accesibilidad {
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
   z-index: 2000;
 }
@@ -156,6 +156,7 @@ onMounted(() => {
   flex-direction: column;
   gap: 8px;
   width: 160px;
+  z-index: 2001;
 }
 
 #menuAccesibilidad button {
