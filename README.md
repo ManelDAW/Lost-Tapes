@@ -256,11 +256,22 @@ Sección al final de la página "Nosotros" con los tres pilares (Ambiental, Soci
 ## Docker
 
 ```bash
+# Copiar las variables de entorno
+cp .env.example .env
+
+# Arrancar
 docker compose up
+
 # Disponible en http://localhost:5173
 ```
 
-Monta el código fuente como volumen para hot-reload. Imagen `node:20-alpine`.
+| Servicio | Imagen | Puerto |
+|----------|--------|--------|
+| `frontend` | Node 20 (Dockerfile propio) | 5173 |
+
+Monta el código fuente como volumen para hot-reload. `VITE_API_URL` se configura en
+`.env` (ver `.env.example`) y por defecto apunta al backend en
+`http://localhost:8000/api`.
 
 ---
 
