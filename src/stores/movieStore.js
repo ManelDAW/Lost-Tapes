@@ -27,6 +27,7 @@ function mapProduct(p) {
 export const useMovieStore = defineStore('movieStore', {
   state: () => ({
     user: null,
+    sessionChecked: false,
     peliculas: [],
     loading: false,
     error: null,
@@ -75,15 +76,18 @@ export const useMovieStore = defineStore('movieStore', {
     },
 
     async restoreSession() {
+      if (this.sessionChecked) return
       const token = localStorage.getItem('auth_token')
-      if (!token) return
-      try {
-        const res = await getProfile()
-        const u = res.data
-        this.user = { id: u.id, name: u.name, email: u.email, role: u.role ?? 'editor' }
-      } catch {
-        localStorage.removeItem('auth_token')
+      if (token) {
+        try {
+          const res = await getProfile()
+          const u = res.data
+          this.user = { id: u.id, name: u.name, email: u.email, role: u.role ?? 'editor' }
+        } catch {
+          localStorage.removeItem('auth_token')
+        }
       }
+      this.sessionChecked = true
     },
 
     setUser(user) {

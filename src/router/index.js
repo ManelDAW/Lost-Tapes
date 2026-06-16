@@ -46,8 +46,9 @@ const router = createRouter({
 })
 
 // Guard de navegación: protege las rutas según auth y rol
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   const store = useMovieStore()
+  await store.restoreSession()
   const user = store.user
 
   if (to.meta.requiresAuth && !user) {

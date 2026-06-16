@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useMovieStore } from '@/stores/movieStore';
+import { updateMovie, createMovie, deleteMovie } from '@/services/api';
 
 const movieStore = useMovieStore();
 const showForm = ref(false);
@@ -15,23 +16,50 @@ const openCreate = () => {
 
 const openEdit = (movie) => {
   editingProduct.value = movie;
-  form.value = { ...movie };
+  form.value = { title: movie.title, duracion: movie.duracion, desc: movie.desc, folder: movie.folder };
   showForm.value = true;
 };
 
-const saveProduct = () => {
+const saveProduct = async () => {
+  const payload = {
+    name: form.value.title,
+    duration: form.value.duracion,
+    description: form.value.desc,
+    folder: form.value.folder,
+  };
+
   if (editingProduct.value) {
+    const { data } = await updateMovie(editingProduct.value.id, payload);
+    const product = data.data ?? data;
     const index = movieStore.peliculas.findIndex(p => p.id === editingProduct.value.id);
-    if (index !== -1) movieStore.peliculas[index] = { ...editingProduct.value, ...form.value };
+    if (index !== -1) {
+      movieStore.peliculas[index] = {
+        ...movieStore.peliculas[index],
+        title: product.name,
+        duracion: product.duration,
+        desc: product.description,
+        folder: product.folder,
+      };
+    }
   } else {
-    const newId = movieStore.peliculas.length + 1;
-    movieStore.peliculas.push({ id: newId, likes: 0, comments: [], ...form.value });
+    const { data } = await createMovie({ ...payload, sku: `SKU-${Date.now()}`, price: 0, stock: 0 });
+    const product = data.data ?? data;
+    movieStore.peliculas.push({
+      id: product.id,
+      title: product.name,
+      duracion: product.duration,
+      desc: product.description,
+      folder: product.folder,
+      likes: 0,
+      comments: [],
+    });
   }
   showForm.value = false;
 };
 
-const deleteProduct = (id) => {
+const deleteProduct = async (id) => {
   if (confirm('¿Seguro que quieres eliminar esta película?')) {
+    await deleteMovie(id);
     movieStore.peliculas = movieStore.peliculas.filter(p => p.id !== id);
   }
 };
