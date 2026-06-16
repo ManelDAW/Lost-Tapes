@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useMovieStore } from '@/stores/movieStore';
 import { useCartStore } from '@/stores/cartStore';
@@ -13,6 +13,12 @@ const movie = computed(() => movieStore.peliculas.find(p => p.id === Number(rout
 const user = computed(() => movieStore.user);
 const cart = useCartStore();
 const addedToCart = ref(false);
+const liked = ref(false);
+
+onMounted(async () => {
+  const result = await movieStore.fetchMovie(Number(route.params.id));
+  liked.value = result.user_liked ?? false;
+});
 
 const addToCart = () => {
   cart.add(movie.value);
@@ -28,23 +34,17 @@ const relatedMovies = computed(() => {
 });
 
 const newComment = ref('');
-const liked = ref(false);
 
-const submitComment = () => {
+const submitComment = async () => {
   if (!newComment.value.trim()) return;
-  movieStore.addComment(movie.value.id, {
-    id: Date.now(),
-    user: user.value.name,
-    text: newComment.value.trim(),
-    date: new Date().toLocaleDateString('es-ES'),
-  });
+  await movieStore.addComment(movie.value.id, { text: newComment.value.trim() });
   newComment.value = '';
 };
 
-const handleLike = () => {
+const handleLike = async () => {
   if (liked.value) return;
-  movieStore.toggleLike(movie.value.id);
-  liked.value = true;
+  const isLiked = await movieStore.toggleLike(movie.value.id);
+  liked.value = isLiked;
 };
 </script>
 

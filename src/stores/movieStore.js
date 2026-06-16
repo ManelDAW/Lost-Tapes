@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getMovies, login, logout, getProfile } from '@/services/api'
+import { getMovies, getMovie, login, logout, getProfile, likeProduct, postComment } from '@/services/api'
 
 // Mapea un producto del backend al formato que usa el frontend
 function mapProduct(p) {
@@ -14,8 +14,13 @@ function mapProduct(p) {
     stock: p.stock,
     sku: p.sku,
     category: p.category || '',
-    likes: p.likes ?? 0,
-    comments: p.comments ?? [],
+    likes: p.likes_count ?? p.likes ?? 0,
+    comments: (p.comments ?? []).map(c => ({
+      id: c.id,
+      user: c.user?.name ?? 'Usuario',
+      text: c.body,
+      date: new Date(c.created_at).toLocaleDateString('es-ES'),
+    })),
   }
 }
 
@@ -89,14 +94,34 @@ export const useMovieStore = defineStore('movieStore', {
       this.logoutUser()
     },
 
-    addComment(movieId, comment) {
+    async addComment(movieId, commentData) {
+      const { data } = await postComment(movieId, commentData.text)
       const movie = this.peliculas.find(p => p.id === movieId)
-      if (movie) movie.comments.push(comment)
+      if (movie) {
+        movie.comments.push({
+          id: data.id,
+          user: data.user?.name ?? 'Usuario',
+          text: data.body,
+          date: new Date(data.created_at).toLocaleDateString('es-ES'),
+        })
+      }
     },
 
-    toggleLike(movieId) {
+    async toggleLike(movieId) {
+      const { data } = await likeProduct(movieId)
       const movie = this.peliculas.find(p => p.id === movieId)
-      if (movie) movie.likes++
+      if (movie) movie.likes = data.likes_count
+      return data.liked
+    },
+
+    async fetchMovie(id) {
+      const { data } = await getMovie(id)
+      const product = data.data ?? data
+      const mapped = mapProduct(product)
+      const idx = this.peliculas.findIndex(p => p.id === mapped.id)
+      if (idx !== -1) this.peliculas[idx] = mapped
+      else this.peliculas.push(mapped)
+      return { ...mapped, user_liked: data.user_liked ?? false }
     },
   },
 })

@@ -43,3 +43,11 @@ export async function logout() {
 export async function getProfile() {
   return api.get('/user')
 }
+
+export async function likeProduct(id) {
+  return api.post(`/products/${id}/like`)
+}
+
+export async function postComment(id, body) {
+  return api.post(`/products/${id}/comments`, { body })
+}
