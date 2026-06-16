@@ -37,16 +37,12 @@ const reset    = () => { resetForm(); submitted.value = false; };
 
       <div class="contact-info">
         <div class="info-item">
-          <span class="info-label">Proyecto</span>
-          <span class="info-value">Lost Tapes · 2DAW 2025–2026</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Equipo</span>
-          <span class="info-value">Manel · Alex · Maxi</span>
-        </div>
-        <div class="info-item">
           <span class="info-label">Web</span>
           <span class="info-value">projecte12.ddaw.es</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Respuesta</span>
+          <span class="info-value">En menos de 48 horas</span>
         </div>
       </div>
 
@@ -125,7 +121,7 @@ const reset    = () => { resetForm(); submitted.value = false; };
 
 /* ── Columna izquierda ─────────────────────────────────────────── */
 .contact-left {
-  padding: 80px 56px;
+  padding: 80px 40px 80px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -167,7 +163,6 @@ const reset    = () => { resetForm(); submitted.value = false; };
   font-size: 15px;
   line-height: 1.8;
   margin-bottom: 40px;
-  max-width: 360px;
 }
 
 /* Info items */
@@ -219,7 +214,7 @@ const reset    = () => { resetForm(); submitted.value = false; };
 
 .contact-right .film-wrap {
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 /* ── Confirmación ─────────────────────────────────────────────── */

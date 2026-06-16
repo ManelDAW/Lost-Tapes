@@ -71,7 +71,6 @@
     <!-- ── SOSTENIBILIDAD ─────────────────────────────────────────── -->
     <section class="about-section" id="sostenibilidad">
       <div class="section-header mb-4">
-        <span class="about-tag">ASG</span>
         <h2 class="about-section__title">Compromiso con la sostenibilidad</h2>
         <p class="about-section__lead">
           En Lost Tapes creemos que la tecnología y la cultura pueden ir de la mano
