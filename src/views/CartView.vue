@@ -16,7 +16,7 @@ const checkout = () => {
 
 <template>
   <div class="container py-5" style="max-width:780px;">
-    <h1 class="fw-bold mb-4" style="font-size:2rem; color:var(--page-text);">Tu carrito</h1>
+    <h1 class="fw-bold mb-4" style="font-size:clamp(1.4rem, 4vw, 2rem); color:var(--page-text);">Tu carrito</h1>
 
     <!-- Vacío -->
     <div v-if="ordered" class="text-center py-5">
@@ -44,7 +44,7 @@ const checkout = () => {
              style="background:var(--page-card-bg); border:1px solid var(--page-border);">
 
           <!-- Imagen -->
-          <img :src="getImageUrl(item)" :alt="item.title"
+          <img :src="getImageUrl(item)" :alt="item.title" loading="lazy"
                style="width:64px; height:90px; object-fit:cover; border-radius:4px; flex-shrink:0;" />
 
           <!-- Info -->

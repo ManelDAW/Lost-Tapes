@@ -33,7 +33,7 @@ const reset = () => {
     <div class="film-wrap" style="max-width:600px;">
       <div class="film-edge"></div>
       <div class="film-content">
-        <h1 class="fw-bold text-center mb-1" style="font-size:2rem;">Contáctanos</h1>
+        <h1 class="fw-bold text-center mb-1" style="font-size:clamp(1.4rem, 4vw, 2rem);">Contáctanos</h1>
         <p class="text-center mb-4" style="color:#aaa; font-size:0.9rem;">
           Envíanos un mensaje y te responderemos lo antes posible.
         </p>

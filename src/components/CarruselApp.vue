@@ -108,7 +108,7 @@ onUnmounted(() => {
   z-index: 5;
 }
 
-.movie-title { margin: 0; font-size: 1.6rem; font-weight: bold; }
+.movie-title { margin: 0; font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: bold; }
 .movie-desc { margin: 5px 0 0; color: #ddd; font-size: 1rem; }
 
 /* Estilos de las flechas */

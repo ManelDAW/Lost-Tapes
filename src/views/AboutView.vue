@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5">
-    <h1 class="fw-bold mb-3" style="font-size:2.4rem;">Sobre Lost Tapes</h1>
+    <h1 class="fw-bold mb-3" style="font-size:clamp(1.5rem, 5vw, 2.4rem);">Sobre Lost Tapes</h1>
     <p class="lead mb-5" style="color: var(--page-muted); max-width:700px;">
       Lost Tapes es una tienda especializada en cine de culto: películas que el tiempo ha enterrado
       y que merecen ser rescatadas. Nuestro catálogo reúne joyas del cine de autor, obras olvidadas
@@ -57,7 +57,7 @@
 
     <!-- Sección de Sostenibilidad -->
     <div class="border-top mt-5 pt-5" style="border-color: var(--page-border) !important;" id="sostenibilidad">
-      <h2 class="fw-bold mb-2" style="font-size:2rem; color: var(--page-text);">
+      <h2 class="fw-bold mb-2" style="font-size:clamp(1.3rem, 4vw, 2rem); color: var(--page-text);">
         Compromiso con la Sostenibilidad
       </h2>
       <p class="mb-5" style="color: var(--page-muted); max-width:700px;">

@@ -40,7 +40,7 @@ const deleteProduct = (id) => {
 <template>
   <div class="container-xl py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="fw-bold mb-0" style="font-size:1.8rem; color: var(--page-text);">Gestión de productos</h1>
+      <h1 class="fw-bold mb-0" style="font-size:clamp(1.2rem, 3.5vw, 1.8rem); color: var(--page-text);">Gestión de productos</h1>
       <button class="btn btn-accent fw-bold" @click="openCreate">+ Añadir película</button>
     </div>
 

@@ -37,7 +37,7 @@ const onSubmit = handleSubmit(async (values) => {
       <div class="film-content text-center">
         <img src="@/assets/img/Logo_Tapes.png" alt="Logo" height="60"
              style="background:white; padding:4px; margin-bottom:20px;" />
-        <h1 class="fw-bold mb-1" style="font-size:2rem;">Iniciar sesión</h1>
+        <h1 class="fw-bold mb-1" style="font-size:clamp(1.4rem, 4vw, 2rem);">Iniciar sesión</h1>
         <p class="mb-4" style="color:#aaa; font-size:0.9rem;">Accede a tu cuenta de Lost Tapes</p>
 
         <form @submit.prevent="onSubmit" class="text-start" novalidate>

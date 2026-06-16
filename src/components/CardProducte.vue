@@ -11,7 +11,7 @@ const router = useRouter();
   <div v-if="movie" class="movie-card card h-100"
        @click="router.push(`/productos/${movie.id}`)">
     <div class="movie-card__img-wrap">
-      <img :src="getImageUrl(movie)" :alt="movie.title"
+      <img :src="getImageUrl(movie)" :alt="movie.title" loading="lazy"
            class="card-img-top movie-card__img" />
       <div class="movie-card__overlay">
         <span>Ver detalle →</span>

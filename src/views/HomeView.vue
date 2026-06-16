@@ -9,7 +9,7 @@ const movieStore = useMovieStore();
 
 <template>
   <div class="container-xl py-4">
-    <h2 class="fw-bold text-center mb-4" style="font-size:2rem;">New Cult Movies</h2>
+    <h1 class="fw-bold text-center mb-4" style="font-size:clamp(1.4rem, 4vw, 2rem);">New Cult Movies</h1>
 
     <CarruselApp />
 

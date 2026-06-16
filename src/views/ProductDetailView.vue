@@ -59,9 +59,9 @@ const handleLike = () => {
              style="aspect-ratio:2/3; object-fit:cover; max-width:260px; width:100%;" />
       </div>
       <div class="col-12 col-md-8 col-lg-9">
-        <h1 class="fw-bold mb-1" style="font-size:2rem; color: var(--page-text);">{{ movie.title }}</h1>
+        <h1 class="fw-bold mb-1" style="font-size:clamp(1.4rem, 4vw, 2rem); color: var(--page-text);">{{ movie.title }}</h1>
         <p class="mb-2" style="color: var(--page-muted);">{{ movie.duracion }}</p>
-        <p class="mb-4 fw-bold" style="font-size:1.6rem; color: var(--accent);">
+        <p class="mb-4 fw-bold" style="font-size:clamp(1.1rem, 3vw, 1.6rem); color: var(--accent);">
           {{ Number(movie.price).toFixed(2) }} €
         </p>
         <p class="mb-4" style="color: var(--page-muted); line-height:1.75;">{{ movie.desc }}</p>
@@ -83,7 +83,7 @@ const handleLike = () => {
 
     <section>
       <h2 class="fw-bold mb-3 pb-2 border-bottom"
-          style="font-size:1.3rem; color: var(--page-text); border-color: var(--page-border) !important;">
+          style="font-size:clamp(1rem, 2.5vw, 1.3rem); color: var(--page-text); border-color: var(--page-border) !important;">
         Comentarios ({{ movie.comments.length }})
       </h2>
 
@@ -121,14 +121,14 @@ const handleLike = () => {
     <!-- Películas relacionadas -->
     <section v-if="relatedMovies.length > 0" class="mt-5 pt-4 border-top"
              style="border-color: var(--page-border) !important;">
-      <h2 class="fw-bold mb-4" style="font-size:1.3rem; color: var(--page-text);">
+      <h2 class="fw-bold mb-4" style="font-size:clamp(1rem, 2.5vw, 1.3rem); color: var(--page-text);">
         También te puede interesar
       </h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
         <div class="col" v-for="rel in relatedMovies" :key="rel.id">
           <div class="related-card card h-100" @click="router.push(`/productos/${rel.id}`)"
                style="cursor:pointer; background: var(--page-card-bg); border-color: var(--page-border);">
-            <img :src="getImageUrl(rel)" :alt="rel.title"
+            <img :src="getImageUrl(rel)" :alt="rel.title" loading="lazy"
                  style="height:140px; object-fit:cover; width:100%;" />
             <div class="card-body py-2 px-3">
               <p class="mb-0 fw-bold small" style="color: var(--page-text);">{{ rel.title }}</p>

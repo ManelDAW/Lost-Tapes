@@ -12,6 +12,7 @@ const PER_PAGE = 6;
 const currentPage = ref(1);
 const priceFilter = ref('all');
 const sortBy = ref('default');
+const searchInput = ref(route.query.q ?? '');
 const localSearch = ref(route.query.q ?? '');
 
 const PRICE_FILTERS = [
@@ -20,6 +21,13 @@ const PRICE_FILTERS = [
   { key: 'mid',    label: '15 € – 20 €' },
   { key: 'high',   label: 'Más de 20 €' },
 ];
+
+// Debounce: espera 300ms tras dejar de escribir antes de filtrar
+let searchTimeout = null;
+watch(searchInput, (value) => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => { localSearch.value = value; }, 300);
+});
 
 watch([localSearch, priceFilter, sortBy], () => { currentPage.value = 1; });
 
@@ -42,7 +50,7 @@ const filteredMovies = computed(() => {
   return list;
 });
 
-const hasFilters = computed(() => priceFilter.value !== 'all' || sortBy.value !== 'default' || localSearch.value.trim());
+const hasFilters = computed(() => priceFilter.value !== 'all' || sortBy.value !== 'default' || searchInput.value.trim());
 
 const totalPages = computed(() => Math.max(1, Math.ceil(filteredMovies.value.length / PER_PAGE)));
 
@@ -52,8 +60,10 @@ const paginatedMovies = computed(() => {
 });
 
 const clearFilters = () => {
+  clearTimeout(searchTimeout);
   priceFilter.value = 'all';
   sortBy.value = 'default';
+  searchInput.value = '';
   localSearch.value = '';
   router.push({ path: '/productos' });
 };
@@ -61,7 +71,7 @@ const clearFilters = () => {
 
 <template>
   <div class="container-xl py-5">
-    <h2 class="fw-bold text-center mb-5" style="font-size:2rem; color:var(--page-text);">Nuestro Catálogo</h2>
+    <h1 class="fw-bold text-center mb-5" style="font-size:clamp(1.4rem, 4vw, 2rem); color:var(--page-text);">Nuestro Catálogo</h1>
 
     <!-- Barra de filtros -->
     <div class="filter-bar mb-3">
@@ -98,11 +108,11 @@ const clearFilters = () => {
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input
-          v-model="localSearch"
+          v-model="searchInput"
           type="text"
           class="search-input"
           placeholder="Buscar por título o descripción..." />
-        <button v-if="localSearch" class="search-clear" @click="localSearch = ''">✕</button>
+        <button v-if="searchInput" class="search-clear" @click="searchInput = ''">✕</button>
       </div>
       <div class="d-flex align-items-center gap-3">
         <button v-if="hasFilters" class="filter-clear" @click="clearFilters">✕ Limpiar todo</button>

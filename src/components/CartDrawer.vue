@@ -36,7 +36,7 @@ const goToCheckout = () => {
     <!-- Items -->
     <div v-else class="cart-drawer__items">
       <div v-for="item in cart.items" :key="item.id" class="cart-drawer__item">
-        <img :src="getImageUrl(item)" :alt="item.title"
+        <img :src="getImageUrl(item)" :alt="item.title" loading="lazy"
              style="width:52px; height:72px; object-fit:cover; border-radius:4px; flex-shrink:0;" />
 
         <div class="flex-grow-1 mx-2">
