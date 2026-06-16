@@ -17,7 +17,7 @@ const isAdminOrVendedor = computed(() => user.value?.role === 'admin' || user.va
 const closeMenu = () => { menuOpen.value = false; };
 
 const logout = () => {
-  movieStore.logout();
+  movieStore.logoutUser();
   showDropdown.value = false;
   closeMenu();
   router.push('/');
@@ -42,8 +42,8 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
 
       <!-- Logo -->
       <router-link class="lt-nav__logo" to="/" @click="closeMenu">
-        <img src="@/assets/img/Logo_Tapes.png" alt="Lost Tapes" height="40"
-             style="background:white; padding:2px; display:block;" />
+        <img src="@/assets/img/Logo_Tapes.png" alt="Lost Tapes" height="52"
+             style="background:white; padding:3px; display:block;" />
       </router-link>
 
       <!-- Desktop: links centrados -->
@@ -146,7 +146,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 20px;
-  height: 60px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -175,10 +175,10 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
 
 .lt-nav__links a {
   display: block;
-  padding: 6px 14px;
+  padding: 8px 16px;
   color: #ccc;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
   border-radius: 6px;
   transition: color 0.2s, background 0.2s;
 }
@@ -190,7 +190,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
 }
 
 .lt-nav__links a.router-link-exact-active {
-  color: var(--accent);
+  color: #c0392b;
 }
 
 /* Right side */
@@ -212,13 +212,13 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
   position: relative;
   transition: border-color 0.2s;
 }
-.lt-nav__cart:hover { border-color: var(--accent); }
+.lt-nav__cart:hover { border-color: #c0392b; }
 
 .lt-nav__badge {
   position: absolute;
   top: -6px;
   right: -6px;
-  background: var(--accent);
+  background: #c0392b;
   color: #fff;
   border-radius: 50%;
   width: 18px;
@@ -243,7 +243,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
   display: inline-flex;
   align-items: center;
 }
-.lt-nav__btn:hover { border-color: var(--accent); color: #fff; }
+.lt-nav__btn:hover { border-color: #c0392b; color: #fff; }
 
 /* Desktop dropdown */
 .lt-dropdown {
@@ -334,7 +334,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
 
 .lt-mobile-menu ul a:hover,
 .lt-mobile-menu ul a.router-link-exact-active {
-  color: var(--accent);
+  color: #c0392b;
 }
 
 .lt-mobile-menu__footer {
@@ -348,7 +348,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutsideClick));
   display: block;
   text-align: center;
   padding: 12px;
-  background: var(--accent);
+  background: #c0392b;
   color: #fff;
   border-radius: 8px;
   text-decoration: none;

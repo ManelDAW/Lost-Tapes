@@ -1,187 +1,393 @@
 <template>
-  <div class="container py-5">
-    <h1 class="fw-bold mb-3" style="font-size:clamp(1.5rem, 5vw, 2.4rem);">Sobre Lost Tapes</h1>
-    <p class="lead mb-5" style="color: var(--page-muted); max-width:700px;">
-      Lost Tapes es una tienda especializada en cine de culto: películas que el tiempo ha enterrado
-      y que merecen ser rescatadas. Nuestro catálogo reúne joyas del cine de autor, obras olvidadas
-      y películas que desafiaron las convenciones de su época.
-    </p>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-      <div class="col">
-        <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-          <div class="card-body">
-            <div class="fs-2 mb-3">🎬</div>
-            <h5 class="card-title fw-bold" style="color: var(--page-text);">Nuestra misión</h5>
-            <p class="card-text small" style="color: var(--page-muted);">
-              Recuperar y difundir películas que han quedado fuera de los circuitos comerciales,
-              dándoles la visibilidad que merecen entre los amantes del cine.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-          <div class="card-body">
-            <div class="fs-2 mb-3">🎞️</div>
-            <h5 class="card-title fw-bold" style="color: var(--page-text);">¿Qué encontrarás?</h5>
-            <p class="card-text small" style="color: var(--page-muted);">
-              Cine japonés de los años 60, nuevas olas europeas, cine de autor de Europa del Este
-              y muchas otras obras que no encontrarás en las grandes plataformas.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-          <div class="card-body">
-            <div class="fs-2 mb-3">💬</div>
-            <h5 class="card-title fw-bold" style="color: var(--page-text);">La comunidad</h5>
-            <p class="card-text small" style="color: var(--page-muted);">
-              Regístrate para dejar comentarios, dar me gusta a tus películas favoritas
-              y estar al tanto de las nuevas incorporaciones al catálogo.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="border-top pt-4" style="border-color: var(--page-border) !important;">
-      <h5 class="fw-bold mb-2" style="color: var(--page-text);">Proyecto académico</h5>
-      <p style="color: var(--page-muted); font-size:0.95rem;">
-        Lost Tapes es el proyecto intermodular del ciclo de
-        <strong style="color: var(--page-text);">Desarrollo de Aplicaciones Web (DAW)</strong>.
-        Desarrollado con Vue 3, Pinia, Vue Router y Laravel.
+  <!-- ── BANNER ─────────────────────────────────────────────────── -->
+  <section class="about-banner">
+    <div class="about-banner__inner">
+      <span class="about-tag">Sobre nosotros</span>
+      <h1 class="about-banner__title">Cine que merece<br/><span>ser recordado</span></h1>
+      <div class="about-rule"></div>
+      <p class="about-banner__sub">
+        Lost Tapes es una tienda especializada en cine de culto: películas que el tiempo
+        ha enterrado y que merecen ser rescatadas.
       </p>
     </div>
+  </section>
 
-    <!-- Sección de Sostenibilidad -->
-    <div class="border-top mt-5 pt-5" style="border-color: var(--page-border) !important;" id="sostenibilidad">
-      <h2 class="fw-bold mb-2" style="font-size:clamp(1.3rem, 4vw, 2rem); color: var(--page-text);">
-        Compromiso con la Sostenibilidad
-      </h2>
-      <p class="mb-5" style="color: var(--page-muted); max-width:700px;">
-        En Lost Tapes creemos que la tecnología y la cultura pueden ir de la mano con el respeto al
-        medio ambiente y a la sociedad. Estos son nuestros principios ASG.
-      </p>
+  <div class="container-xl">
 
-      <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-        <div class="col">
-          <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-            <div class="card-body">
-              <div class="fs-2 mb-3">🌱</div>
-              <h5 class="card-title fw-bold" style="color: var(--page-text);">Ambiental</h5>
-              <ul class="small ps-3 mb-0" style="color: var(--page-muted);">
-                <li class="mb-2">
-                  Distribución 100% digital: sin fabricación de DVDs ni embalajes físicos,
-                  reduciendo residuos plásticos y emisiones de transporte.
-                </li>
-                <li class="mb-2">
-                  Infraestructura en la nube con instancias dimensionadas al uso real,
-                  evitando el consumo energético de servidores ociosos.
-                </li>
-                <li>
-                  Optimización de imágenes y assets para reducir el ancho de banda
-                  consumido por cada visita.
-                </li>
-              </ul>
-            </div>
+    <!-- ── MISIÓN ─────────────────────────────────────────────────── -->
+    <section class="about-section">
+      <div class="row g-0">
+        <div class="col-12 col-md-4 about-block">
+          <span class="about-num">01</span>
+          <h3 class="about-block__title">Nuestra misión</h3>
+          <p class="about-block__text">
+            Recuperar y difundir películas que han quedado fuera de los circuitos comerciales,
+            dándoles la visibilidad que merecen entre los amantes del cine.
+          </p>
+        </div>
+        <div class="col-12 col-md-4 about-block">
+          <span class="about-num">02</span>
+          <h3 class="about-block__title">¿Qué encontrarás?</h3>
+          <p class="about-block__text">
+            Cine japonés de los años 60, nuevas olas europeas, cine de autor de Europa del Este
+            y muchas otras obras que no encontrarás en las grandes plataformas.
+          </p>
+        </div>
+        <div class="col-12 col-md-4 about-block">
+          <span class="about-num">03</span>
+          <h3 class="about-block__title">La comunidad</h3>
+          <p class="about-block__text">
+            Regístrate para dejar comentarios, dar me gusta a tus películas favoritas
+            y estar al tanto de las nuevas incorporaciones al catálogo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROYECTO ACADÉMICO ─────────────────────────────────────── -->
+    <section class="about-section">
+      <div class="about-academic">
+        <div class="about-academic__left">
+          <span class="about-tag">Stack técnico</span>
+          <h2 class="about-section__title">Cómo está construido</h2>
+        </div>
+        <div class="about-academic__right">
+          <p class="about-academic__text">
+            Lost Tapes está desarrollado con <strong>Vue 3</strong>, Pinia y Vue Router en el frontend,
+            y <strong>Laravel 11</strong> con Sanctum en el backend, desplegado sobre
+            infraestructura AWS con CI/CD automático vía GitHub Actions.
+          </p>
+          <div class="about-team">
+            <span class="team-member">Manel</span>
+            <span class="team-sep">·</span>
+            <span class="team-member">Alex</span>
+            <span class="team-sep">·</span>
+            <span class="team-member">Maxi</span>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-            <div class="card-body">
-              <div class="fs-2 mb-3">🤝</div>
-              <h5 class="card-title fw-bold" style="color: var(--page-text);">Social</h5>
-              <ul class="small ps-3 mb-0" style="color: var(--page-muted);">
-                <li class="mb-2">
-                  Accesibilidad web: widget WCAG integrado para personas con necesidades
-                  visuales, motoras o cognitivas.
-                </li>
-                <li class="mb-2">
-                  Preservación del patrimonio cinematográfico: rescatamos obras de cine de
-                  autor que de otro modo caerían en el olvido.
-                </li>
-                <li>
-                  Plataforma abierta: cualquier usuario puede registrarse, comentar y
-                  compartir su pasión por el cine independiente.
-                </li>
-              </ul>
-            </div>
+      </div>
+    </section>
+
+    <!-- ── SOSTENIBILIDAD ─────────────────────────────────────────── -->
+    <section class="about-section" id="sostenibilidad">
+      <div class="section-header mb-4">
+        <span class="about-tag">ASG</span>
+        <h2 class="about-section__title">Compromiso con la sostenibilidad</h2>
+        <p class="about-section__lead">
+          En Lost Tapes creemos que la tecnología y la cultura pueden ir de la mano
+          con el respeto al medio ambiente y a la sociedad.
+        </p>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-md-4">
+          <div class="asg-block">
+            <span class="asg-letter">A</span>
+            <h4 class="asg-title">Ambiental</h4>
+            <ul class="asg-list">
+              <li>Distribución 100% digital — sin DVDs ni embalajes físicos.</li>
+              <li>Infraestructura cloud dimensionada al uso real, sin servidores ociosos.</li>
+              <li>Optimización de imágenes y assets para reducir el ancho de banda.</li>
+            </ul>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100" style="background: var(--page-card-bg); border-color: var(--page-border);">
-            <div class="card-body">
-              <div class="fs-2 mb-3">⚖️</div>
-              <h5 class="card-title fw-bold" style="color: var(--page-text);">Gobernanza</h5>
-              <ul class="small ps-3 mb-0" style="color: var(--page-muted);">
-                <li class="mb-2">
-                  Código abierto y documentado: el repositorio del proyecto es público,
-                  auditado y con historial de cambios transparente en GitHub.
-                </li>
-                <li class="mb-2">
-                  Autenticación segura con tokens Sanctum y OAuth2, sin almacenar
-                  contraseñas en texto plano ni sesiones inseguras.
-                </li>
-                <li>
-                  Control de roles (admin / vendedor / editor) para asegurar que cada
-                  usuario solo accede a lo que le corresponde.
-                </li>
-              </ul>
-            </div>
+        <div class="col-12 col-md-4">
+          <div class="asg-block">
+            <span class="asg-letter">S</span>
+            <h4 class="asg-title">Social</h4>
+            <ul class="asg-list">
+              <li>Accesibilidad web WCAG para personas con necesidades visuales o motoras.</li>
+              <li>Preservación del patrimonio cinematográfico olvidado.</li>
+              <li>Plataforma abierta: cualquier usuario puede registrarse y participar.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="asg-block">
+            <span class="asg-letter">G</span>
+            <h4 class="asg-title">Gobernanza</h4>
+            <ul class="asg-list">
+              <li>Código abierto y documentado en GitHub con historial de cambios transparente.</li>
+              <li>Autenticación segura con Sanctum y OAuth2.</li>
+              <li>Control de roles para que cada usuario acceda solo a lo que le corresponde.</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="p-4 rounded" style="background: var(--page-card-bg); border: 1px solid var(--page-border);">
-        <h5 class="fw-bold mb-2" style="color: var(--page-text);">Propuestas de mejora</h5>
-        <p class="small mb-3" style="color: var(--page-muted);">
-          Aunque Lost Tapes es un proyecto académico, estas serían las siguientes medidas a
-          implementar en un entorno de producción real:
+      <!-- Propuestas de mejora -->
+      <div class="mejoras-box">
+        <h5 class="mejoras-title">Propuestas de mejora</h5>
+        <p class="mejoras-sub">
+          Aunque Lost Tapes es un proyecto académico, estas serían las siguientes
+          medidas a implementar en producción real:
         </p>
         <div class="row row-cols-1 row-cols-md-2 g-3">
           <div class="col">
-            <div class="d-flex gap-2 align-items-start">
-              <span style="color:var(--accent); font-size:1.1rem;">→</span>
-              <p class="small mb-0" style="color: var(--page-muted);">
-                <strong style="color: var(--page-text);">Hosting verde:</strong>
-                migrar a proveedores cloud con certificación de energía 100% renovable.
-              </p>
+            <div class="mejora-item">
+              <span class="mejora-arrow">→</span>
+              <p><strong>Hosting verde:</strong> migrar a proveedores cloud con certificación de energía 100% renovable.</p>
             </div>
           </div>
           <div class="col">
-            <div class="d-flex gap-2 align-items-start">
-              <span style="color:var(--accent); font-size:1.1rem;">→</span>
-              <p class="small mb-0" style="color: var(--page-muted);">
-                <strong style="color: var(--page-text);">Política de privacidad:</strong>
-                redactar un aviso legal completo conforme al RGPD y la LSSI.
-              </p>
+            <div class="mejora-item">
+              <span class="mejora-arrow">→</span>
+              <p><strong>Política de privacidad:</strong> aviso legal completo conforme al RGPD y la LSSI.</p>
             </div>
           </div>
           <div class="col">
-            <div class="d-flex gap-2 align-items-start">
-              <span style="color:var(--accent); font-size:1.1rem;">→</span>
-              <p class="small mb-0" style="color: var(--page-muted);">
-                <strong style="color: var(--page-text);">Lazy loading de imágenes:</strong>
-                cargar las portadas solo cuando entran en el viewport, reduciendo
-                datos transferidos en un ~40%.
-              </p>
+            <div class="mejora-item">
+              <span class="mejora-arrow">→</span>
+              <p><strong>Lazy loading de imágenes:</strong> cargar portadas solo cuando entran en el viewport.</p>
             </div>
           </div>
           <div class="col">
-            <div class="d-flex gap-2 align-items-start">
-              <span style="color:var(--accent); font-size:1.1rem;">→</span>
-              <p class="small mb-0" style="color: var(--page-muted);">
-                <strong style="color: var(--page-text);">CDN para assets estáticos:</strong>
-                servir imágenes y vídeos desde una red de distribución para reducir latencia
-                y consumo de CPU del servidor principal.
-              </p>
+            <div class="mejora-item">
+              <span class="mejora-arrow">→</span>
+              <p><strong>CDN para assets estáticos:</strong> servir imágenes y vídeos desde una red de distribución.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
   </div>
 </template>
+
+<style scoped>
+/* ── Banner ────────────────────────────────────────────────────── */
+.about-banner {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a0505 50%, #0d0d0d 100%);
+  padding: 96px 24px 80px;
+  text-align: center;
+}
+
+.about-banner__inner { max-width: 700px; margin: 0 auto; }
+
+.about-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c0392b;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.about-banner__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.about-banner__title span { color: #c0392b; }
+
+.about-rule {
+  width: 50px;
+  height: 2px;
+  background: #c0392b;
+  margin: 0 auto 20px;
+}
+
+.about-banner__sub {
+  color: #777;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Sections ──────────────────────────────────────────────────── */
+.about-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--page-border);
+}
+
+.about-section__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--page-text);
+  margin: 4px 0 8px;
+}
+
+.about-section__lead {
+  color: var(--page-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* ── Bloques de misión ─────────────────────────────────────────── */
+.about-block {
+  padding: 0 32px 0 0;
+  border-right: 1px solid var(--page-border);
+}
+
+.about-block:last-child { border-right: none; padding-right: 0; }
+.about-block:not(:first-child) { padding-left: 32px; }
+
+@media (max-width: 767px) {
+  .about-block {
+    border-right: none;
+    border-bottom: 1px solid var(--page-border);
+    padding: 0 0 32px 0 !important;
+    margin-bottom: 32px;
+  }
+  .about-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+}
+
+.about-num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: #c0392b;
+  opacity: 0.25;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.about-block__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--page-text);
+  margin: 0 0 10px;
+}
+
+.about-block__text {
+  color: var(--page-muted);
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Stack técnico ─────────────────────────────────────────────── */
+.about-academic {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 767px) {
+  .about-academic { grid-template-columns: 1fr; gap: 16px; }
+}
+
+.about-academic__left { /* col 1 — solo el título */ }
+
+.about-academic__right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-academic__text {
+  color: var(--page-muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-team {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.team-member {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--page-text);
+  letter-spacing: 1px;
+}
+
+.team-sep { color: #c0392b; font-weight: 700; }
+
+/* ── ASG ───────────────────────────────────────────────────────── */
+.asg-block {
+  border-left: 3px solid #c0392b;
+  padding-left: 20px;
+  height: 100%;
+}
+
+.asg-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: #c0392b;
+  opacity: 0.3;
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.asg-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--page-text);
+  margin: 0 0 12px;
+}
+
+.asg-list {
+  color: var(--page-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  padding-left: 16px;
+  margin: 0;
+}
+
+.asg-list li { margin-bottom: 8px; }
+.asg-list li:last-child { margin-bottom: 0; }
+
+/* ── Mejoras ───────────────────────────────────────────────────── */
+.mejoras-box {
+  background: var(--page-card-bg);
+  border: 1px solid var(--page-border);
+  border-radius: 6px;
+  padding: 28px 32px;
+}
+
+.mejoras-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--page-text);
+  margin: 0 0 6px;
+}
+
+.mejoras-sub {
+  color: var(--page-muted);
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+.mejora-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.mejora-arrow {
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.mejora-item p {
+  color: var(--page-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mejora-item p strong { color: var(--page-text); }
+</style>

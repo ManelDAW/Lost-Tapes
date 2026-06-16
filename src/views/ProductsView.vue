@@ -71,7 +71,11 @@ const clearFilters = () => {
 
 <template>
   <div class="container-xl py-5">
-    <h1 class="fw-bold text-center mb-5" style="font-size:clamp(1.4rem, 4vw, 2rem); color:var(--page-text);">Nuestro Catálogo</h1>
+    <div class="catalog-header">
+      <span class="catalog-tag">Catálogo</span>
+      <h1 class="catalog-title">Nuestras películas</h1>
+      <div class="catalog-rule"></div>
+    </div>
 
     <!-- Barra de filtros -->
     <div class="filter-bar mb-3">
@@ -125,7 +129,7 @@ const clearFilters = () => {
 
     <!-- Spinner -->
     <div v-if="movieStore.loading" class="text-center py-5">
-      <div class="spinner-border" style="color:var(--accent);" role="status"></div>
+      <div class="spinner-border" style="color:#c0392b;" role="status"></div>
     </div>
 
     <!-- Sin resultados -->
@@ -161,6 +165,38 @@ const clearFilters = () => {
 </template>
 
 <style scoped>
+/* Header editorial */
+.catalog-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.catalog-tag {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c0392b;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.catalog-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  color: var(--page-text);
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+.catalog-rule {
+  width: 40px;
+  height: 2px;
+  background: #c0392b;
+  margin: 0 auto;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -210,7 +246,7 @@ const clearFilters = () => {
   outline: none;
   transition: border-color 0.2s;
 }
-.search-input:focus { border-color: var(--accent); }
+.search-input:focus { border-color: #c0392b; }
 .search-input::placeholder { color: var(--page-muted); }
 
 .search-clear {
@@ -260,13 +296,13 @@ const clearFilters = () => {
 }
 
 .filter-pill:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: #c0392b;
+  color: #c0392b;
 }
 
 .filter-pill--active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #c0392b;
+  border-color: #c0392b;
   color: #fff;
   font-weight: 600;
 }
@@ -285,7 +321,7 @@ const clearFilters = () => {
   background-position: right 12px center;
 }
 
-.filter-select:focus { outline: none; border-color: var(--accent); }
+.filter-select:focus { outline: none; border-color: #c0392b; }
 
 .filter-clear {
   background: none;

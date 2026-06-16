@@ -1,3 +1,5 @@
+// Router de la SPA. Las rutas públicas se importan directamente;
+// las rutas protegidas usan lazy import para reducir el bundle inicial.
 import { createRouter, createWebHistory } from 'vue-router'
 import { useMovieStore } from '@/stores/movieStore'
 import HomeView from '../views/HomeView.vue'
@@ -45,7 +47,8 @@ const router = createRouter({
   ],
 })
 
-// Guard de navegación: protege las rutas según auth y rol
+// Guard asíncrono: espera a que la sesión esté restaurada antes de evaluar
+// permisos. Así funciona aunque el usuario recargue directamente en /admin/...
 router.beforeEach(async (to) => {
   const store = useMovieStore()
   await store.restoreSession()
