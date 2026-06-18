@@ -180,7 +180,7 @@ const deleteProduct = async (id) => {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(24px, 4vw, 36px);
   font-weight: 900;
-  color: var(--page-text);
+  color: #fff;
   margin: 0;
   line-height: 1.1;
 }
@@ -195,10 +195,10 @@ const deleteProduct = async (id) => {
   letter-spacing: 1px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.2s;
   white-space: nowrap;
 }
-.btn-add:hover { background: #a93226; }
+.btn-add:hover { transform: scale(1.05); }
 
 /* Stats */
 .admin-stats {
@@ -217,7 +217,7 @@ const deleteProduct = async (id) => {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 28px;
   font-weight: 700;
-  color: var(--page-text);
+  color: #fff;
   line-height: 1;
 }
 
@@ -230,7 +230,7 @@ const deleteProduct = async (id) => {
 
 /* Tabla */
 .admin-table-wrap {
-  border: 1px solid var(--page-border);
+  border: 1px solid #2a2a2a;
   border-radius: 6px;
   overflow: hidden;
   overflow-x: auto;
@@ -260,11 +260,11 @@ const deleteProduct = async (id) => {
 
 .admin-table tbody tr {
   border-bottom: 1px solid #1a1a1a;
-  transition: background 0.15s;
+  transition: transform 0.15s;
 }
 
 .admin-table tbody tr:last-child { border-bottom: none; }
-.admin-table tbody tr:hover { background: #111; }
+.admin-table tbody tr:hover { transform: scale(1.01); }
 
 .admin-table td {
   padding: 14px 16px;
@@ -280,7 +280,7 @@ const deleteProduct = async (id) => {
 @media (min-width: 1024px) { .col-lg { display: table-cell; } }
 
 .cell-id { color: #444; font-size: 12px; }
-.cell-title { color: var(--page-text); font-weight: 500; }
+.cell-title { color: #fff; font-weight: 500; }
 .cell-muted { color: #666; }
 .cell-truncate {
   max-width: 300px;
@@ -307,14 +307,14 @@ const deleteProduct = async (id) => {
   border-color: #444;
   color: #aaa;
 }
-.btn-edit:hover { border-color: #c0392b; color: #c0392b; }
+.btn-edit:hover { transform: scale(1.08); }
 
 .btn-delete {
   background: transparent;
   border-color: #3a1a1a;
   color: #7a3030;
 }
-.btn-delete:hover { background: #c0392b; border-color: #c0392b; color: #fff; }
+.btn-delete:hover { transform: scale(1.08); }
 
 /* Modal */
 .modal-overlay {
@@ -348,7 +348,7 @@ const deleteProduct = async (id) => {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 18px;
   font-weight: 700;
-  color: var(--page-text);
+  color: #fff;
   margin: 0;
 }
 
@@ -359,9 +359,9 @@ const deleteProduct = async (id) => {
   font-size: 16px;
   cursor: pointer;
   padding: 4px 8px;
-  transition: color 0.15s;
+  transition: transform 0.15s;
 }
-.modal-close:hover { color: #fff; }
+.modal-close:hover { transform: scale(1.2); }
 
 .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 
@@ -380,7 +380,7 @@ const deleteProduct = async (id) => {
   border: 1px solid #2a2a2a;
   border-radius: 4px;
   padding: 9px 12px;
-  color: var(--page-text);
+  color: #fff;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
@@ -408,9 +408,9 @@ const deleteProduct = async (id) => {
   letter-spacing: 1px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.2s;
 }
-.btn-save:hover { background: #a93226; }
+.btn-save:hover { transform: scale(1.04); }
 
 .btn-cancel {
   flex: 1;
@@ -422,7 +422,7 @@ const deleteProduct = async (id) => {
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s;
 }
-.btn-cancel:hover { border-color: #444; color: #aaa; }
+.btn-cancel:hover { transform: scale(1.04); }
 </style>
