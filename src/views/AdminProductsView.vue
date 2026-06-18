@@ -280,7 +280,7 @@ const deleteProduct = async (id) => {
 @media (min-width: 1024px) { .col-lg { display: table-cell; } }
 
 .cell-id { color: #444; font-size: 12px; }
-.cell-title { color: #fff; font-weight: 500; }
+.cell-title { color: #000; font-weight: 500; }
 .cell-muted { color: #666; }
 .cell-truncate {
   max-width: 300px;
