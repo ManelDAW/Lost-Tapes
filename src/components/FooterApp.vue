@@ -51,7 +51,7 @@ onMounted(() => {
         <nav class="lt-footer__nav">
           <a href="#">Términos de servicio</a>
           <a href="#">Política de privacidad</a>
-          <a href="http://api.projecte12.ddaw.es/api/documentation" target="_blank">API Docs</a>
+          <a href="https://api.projecte12.ddaw.es/api/documentation" target="_blank">API Docs</a>
         </nav>
       </div>
 
